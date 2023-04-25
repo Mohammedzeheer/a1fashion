@@ -1,0 +1,264 @@
+
+
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__text">
+                        <h4>Shop</h4>
+                        <div class="breadcrumb__links">
+                            <a href="/">Home</a>
+                            <span>Shop</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Shop Section Begin -->
+    <section class="shop spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="shop__sidebar">
+                        <div class="shop__sidebar__search">
+                            <input type="text" id="searchInput" placeholder="Search products..."
+                                class="form-control rounded-pill border-0 shadow-sm">
+                        </div>
+                        <div class="shop__sidebar__accordion">
+                            <div class="accordion" id="accordionExample">
+                                <div class="card">
+                                    <div class="card-heading">
+                                        <a data-toggle="collapse" data-target="#collapseOne">Categories</a>
+                                    </div>
+                                    <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            <div class="shop__sidebar__categories">
+                                                <ul class="nice-scroll">
+                    
+                                                  
+                                                    <li><a href="/shop">All Category</a></li>
+                                                    {{#each categorydropdown}}
+                                                    {{#if status}} <li><a
+                                                            href="/categoryFilter?catname={{categoryname}}">{{categoryname}}</a></li>{{/if}}
+                                                    {{/each}}
+                                                    
+                    
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                    
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                <div class="col-lg-9">
+                    <div class="shop__product__option">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="shop__product__option__left">
+                                    {{!-- <p>Showing 1–5 of 5 results</p> --}}
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="shop__product__option__right">
+                                    <p>Sort by Price:</p>
+                                    <select onchange="filterProductsByPrice()">
+                                        <option value="">All Price</option>
+                                        <option value="0-499">0 - 499</option>
+                                        <option value="500-999">500 - 999</option>
+                                        <option value="1000-1999">1000 - 1999</option>
+                                        <option value="2000-50000">2000+</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                <div class="row" id="product-list">
+                    {{#each producttable}}
+                    {{#if status}}{{#if categorystatus}}
+                    <div class="col-lg-4 col-md-6 col-sm-6 product-card" data-price="{{productprice}}">
+                        <div class="product__item">
+                            <div class="product__item__pic set-bg" data-setbg="/productimage/{{productimage.[0]}}">
+                                <ul class="product__hover">
+
+                                    <li><a href="/addToWishlist?id={{_id}}"><img src="img/icon/heart.png" alt="">
+                                            <span>Wishlist</span></a></li>
+                                    <li><a href="/shop-details?id={{_id}}"><img src="img/icon/search.png" alt=""><span>Single
+                                                View</span></a></li>
+                                </ul>
+                            </div>
+                            <div class="product__item__text">
+                                <h6>{{productname}}</h6>
+                                <div data-toggle="modal" data-target="#addtocart"><a href="/addToCart?id={{_id}}" class="add-cart">+ Add
+                                        To Cart</a></div>
+                                <h5>Rs: {{productprice}}</h5>
+                            </div>
+                        </div>
+                    </div>
+                    {{/if}}{{/if}}
+                    {{/each}}
+                </div>
+
+
+
+
+             <div class="row">
+                        <div class="col-lg-12">
+                            <div class="product__pagination">
+                            {{#if (gt totalPages 1)}}
+                            {{#if (neq currentPage 1)}}
+                            <a href="/shop?page={{subtract currentPage 1}}">&laquo;</a>
+                            {{/if}}
+                            
+                            {{#each (range 1 totalPages)}}
+                            {{#if (or (eq this currentPage) (and (lt (subtract this currentPage) 4) (gt totalPages (add this currentPage 4))))}}
+                            <a href="/shop?page={{this}}" class="{{#if (eq this currentPage)}}active{{/if}}">{{this}}</a>
+                            {{/if}}
+                            {{/each}}
+                            
+                            {{#if (neq currentPage totalPages)}}
+                            <a href="/shop?page={{add currentPage 1}}">&raquo;</a>
+                            {{/if}}
+                            {{/if}}
+                            </div>
+                        </div>
+                    </div>
+
+ 
+
+                    {{!-- <div class="row">
+                        <div class="col-lg-12">
+                            <div class="product__pagination">
+                                <a class="active" href="#">1</a>
+                                <a href="#">2</a>
+                                <a href="#">3</a>
+                                <span>...</span>
+                                <a href="#">21</a>
+                            </div>
+                        </div>
+                    </div> --}}
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Shop Section End -->
+
+
+
+
+
+
+
+
+
+<!-- add to cart popup modal -->
+<div id="addtocart" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+     	<div class="d-flex justify-content-center align-items-center m-2"> <img  style="width:4rem;height:4rem" src="http://goactionstations.co.uk/wp-content/uploads/2017/03/Green-Round-Tick.png" alt=""></div>
+		<h6 class="d-flex justify-content-center align-items-center m-2 success">Added To Cart!</h6>
+    </div>
+  </div>
+</div>
+ <!-- code  End -->
+
+
+
+ 
+
+
+
+
+   {{!-- search script working--}}
+<script>
+    document.getElementById("searchInput").addEventListener("input", searchProducts);
+
+    function searchProducts() {
+  // Get the search input value
+  var searchInput = document.getElementById("searchInput").value.toLowerCase();
+  
+  // Loop through all the product cards and hide/show them based on search input
+  var productCards = document.querySelectorAll(".product-card");
+  for (var i = 0; i < productCards.length; i++) {
+    var productName = productCards[i].querySelector(".product__item__text h6").textContent.toLowerCase();
+    if (productName.indexOf(searchInput) > -1) {
+      productCards[i].style.display = "";
+    } else {
+      productCards[i].style.display = "none";
+    }
+  }
+}
+</script>
+
+
+
+
+ {{!-- filter product by price script start--}}
+<script>
+    function filterProductsByPrice() {
+        let selectedValue = document.querySelector('select').value;
+        let productList = document.querySelector('#product-list');
+        let products = productList.querySelectorAll('.product-card');
+
+        products.forEach(function (product) {
+            let price = parseFloat(product.dataset.price);
+            let priceRange = selectedValue.split('-');
+
+            if (selectedValue === '') {
+                product.style.display = 'block';
+            } else if (price >= parseFloat(priceRange[0]) && price <= parseFloat(priceRange[1])) {
+                product.style.display = 'block';
+            } else {
+                product.style.display = 'none';
+            }
+        });
+    }
+</script>
+   {{!-- filter product by price script end--}}
+
+
+
+
+   {{!-- added to whishlist ajax --}}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert@2"></script>
+<script>
+  function addToWishlist(productId) {
+    swal({
+      title: "Add to Wishlist?",
+      text: "Are you sure you want to add this product to your wishlist?",
+      icon: "warning",
+      buttons: ["Cancel", "Add"],
+      dangerMode: true,
+    })
+    .then((willAdd) => {
+      if (willAdd) {
+        // Make the request to add the product to the wishlist
+        window.location.href = "/addToWishlist?id=" + productId;
+      }
+    });
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

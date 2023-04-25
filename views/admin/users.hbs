@@ -1,0 +1,65 @@
+
+ 
+
+   
+      
+<section>
+ <div class="content-page">
+   <div class="container-fluid">
+    {{!-- <div class="table-responsive"> --}}
+        <div class="table-wrapper">
+            <div class="table-title">               
+                <div class="row">
+                    <div class="col-sm-10"><h4>User <b>Details</b></h4></div>
+                    {{!-- <div class="col-sm-2">
+                        <button type="button" class="btn btn-info add-new btn-sm"><i class="fa fa-plus"></i><a style="color:white" href="/createuser">Add New</a></button>
+                    </div> --}}
+                </div>
+            </div>
+            <table id="datatable" class="table data-table table-striped table-bordered" >
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        {{!-- <th>Password</th> --}}
+                        <th>Actions</th>
+                        {{!-- <th>Block</th> --}}
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {{#each totable}}
+                        <tr>
+                                <td name="name">{{name}}</td>
+                                <td name="phonenumber">{{phonenumber}}</td>
+                                <td name="email">{{email}}</td>
+                                {{!-- <td name="password">{{password}}</td> --}}
+                                    {{!-- <td> --}}
+                                    {{!-- <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a> --}}
+                                    {{!-- <a class="edit" href="/edit/{{_id}}"><i class="material-icons">&#xE254;</i></a> --}}
+                                    {{!-- <a onclick="return confirm('Do you want delete user')" class="delete" href="/delete/{{_id}}" ><i class="material-icons">&#xE872;</i></a> --}}
+
+                                {{#if blocked}} 
+                                <td class="text-center"><a onclick="return confirm('Do You Want To UnBlock This User ')" class="text-success"  href="/unblock?id={{_id}}"><button type="button" class="btn btn-danger btn-sm">Un-Block</button></a></td>
+                                {{else}} 
+                                <td class="text-center"><a onclick="return confirm('Do You Want To Block This User ')"  class="text-danger"  href="/block?id={{_id}}"><button type="button" class="btn btn-success btn-sm">Block</button></a></td>
+                                {{/if}}
+                                              
+                                {{!-- <td>
+                                    <a href="/block?id={{_id}}"><button type="button" class="btn btn-outline-danger btn-sm">Block</button></a>
+                                    <a href="/unblock?id={{_id}}"><button type="button" class="btn btn-outline-danger btn-sm">unblock</button></a>
+                                </td> --}}
+                       
+                        </tr>
+                    {{/each}}
+                 
+                </tbody>
+            </table>
+        </div>
+    {{!-- </div> --}}
+</div>  
+ </div>
+  </section>
+
+

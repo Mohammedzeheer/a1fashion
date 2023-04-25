@@ -1,0 +1,91 @@
+
+ 
+    <div class="content-page">
+      <div class="table-title">               
+                <div class="row">
+                    <div class="col-sm-10"><h4>Product <b>Details</b></h4></div>
+                    <div class="col-sm-2">
+                        <button type="button" class="btn btn-info add-new btn-sm m-2"><i class="fa fa-plus"></i><a style="color:white" href="/addproductpage">Add New</a></button>
+                    </div>
+                </div>
+            </div>
+         
+
+
+      <div class="container-fluid">
+         <div class="row">
+            <div class="col-lg-12">
+               {{!-- <div style="height: 1000px; overflow-y: scroll;"> --}}
+              <table id="datatable" class="table data-table table-striped table-bordered" >
+                           <thead>
+                            <tr>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Brand</th>
+                            {{!-- <th>Product Id</th> --}}
+                            <th>Category</th>
+                            <th>Stock</th>
+                            <th>Date</th>
+                            <th>Price</th>
+                            <th>Action</th>  
+                            <th>status</th>  
+                              </tr>
+                           </thead>
+                           <tbody>
+                             {{#each producttable}}
+                              <tr>
+                            <td><img style="width: 90px; height: 90px;" src="/productimage/{{productimage.[0]}}"
+                                    alt=""></td>
+                            <td>{{productname}}</td>
+                            <td>{{productbrand}}</td>
+                            {{!-- <td>{{productid}}</td> --}}
+                            <td>{{productcategory}}</td>
+                            <td>{{stock}}</td>
+                            <td>{{date}}</td>
+                            <td>{{productprice}}</td>
+                            
+   
+                            {{!-- <a class="delete" href="#myModal" data-toggle="modal" ><i class="material-icons">&#xE872;</i></a> --}}
+                
+                            {{!-- <td><a class="edit" href="/editProduct"><i class="material-icons">&#xE254;</i></a> --}}
+                            <td><a class="edit" href="/editProduct/{{_id}}"><i class="material-icons">&#xE254;</i></a>
+                            <a class="delete" href="/deleteProduct/{{_id}}" onclick="return confirm('Do you want to delete product')"><i class="material-icons">&#xE872;</i></a>
+                           </td> 
+
+
+
+                             {{#if status}} 
+                                <td class="text-center"><a onclick="return confirm('Do You Want To unlist This Category ')" class="text-success"  href="/unlistProduct?id={{_id}}"><button type="button" class="btn btn-danger btn-sm">Un list</button></a></td>
+                                {{else}} 
+                                <td class="text-center"><a onclick="return confirm('Do You Want To list This Category ')"  class="text-danger"  href="/listProduct?id={{_id}}"><button type="button" class="btn btn-success btn-sm">List</button></a></td>
+                             {{/if}}
+                                         
+
+                        </tr>
+                          {{/each}}
+                        </table>
+               {{!-- </div> --}}
+            </div>
+         </div>
+       </div>
+      </div>
+    </div>
+
+
+                 
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+ 

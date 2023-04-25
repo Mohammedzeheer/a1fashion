@@ -1,0 +1,114 @@
+ <div class="container">            
+                <div class="row">
+                    <div class="col-sm-10"><h4>Your <b>Order</b></h4></div>
+                </div>
+            </div>
+
+
+{{!-- <div class="container">   
+<div class="card text-center">
+  <div class="card-header">
+    {{#each userorder}}
+    {{orderdate}}
+    Featured
+    {{/each}}
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Special title treatment</h5>
+    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+  <div class="card-footer text-muted">
+    2 days ago
+  </div>
+</div>
+</div> --}}
+
+
+
+
+
+
+<div class="container">
+  {{#each userorder}}
+    <div class="row mb-3">
+      <div class="col-md-12">
+        <div class="p-3">
+          <div style="background-color: aliceblue; border: 1px solid black; padding: 10px; position: relative;">
+            <h6>Ordered Date: {{orderdate}}</h6>
+            <h6>Payment Method: {{paymentmethod}}</h6>
+            <h6>Delivery Address: {{deliveryaddress.firstname}}, {{deliveryaddress.address}}, Pin: {{deliveryaddress.pincode}}, {{deliveryaddress.district}}</h6>
+            <h6>Delivery Date: {{deliverydate}}</h6>
+            <h6>Total Price: Rs:{{grandtotal}}</h6>
+            <h6>Status: {{status}}</h6>
+            <div class="d-flex justify-content-end align-items-center flex-wrap">
+              <div class="p-2">
+                <a href="/orderProductView?id={{_id}}" class="btn btn-outline-info"><h6>Details</h6></a>
+              </div>
+              {{#if returnstatus}} 
+                <div class="p-2">
+                  <button onclick="location.href='/addtowallet/{{_id}}/{{grandtotal}}'" class="btn btn-primary">Return</button>
+                </div> 
+              {{else}}
+                <div class="p-2">
+                  <h6 class="text-warning">Processing</h6>
+                </div> 
+              {{/if}} 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {{/each}}
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  {{!-- {{#each userorder}}
+  <div class="col-sm-12 col-md-12 col-lg-12">
+    <div class="p-3">
+      <div style="background-color: aliceblue; border: 1px solid black; padding: 10px; position: relative;">
+        <h6>Ordered Date: {{orderdate}}</h6>
+        <h6>Payment Method: {{paymentmethod}}</h6>
+        <h6>Delivery Address: {{deliveryaddress.firstname}}, {{deliveryaddress.address}}, Pin: {{deliveryaddress.pincode}}, {{deliveryaddress.district}}</h6>
+        <h6>Delivery Date: {{deliverydate}}</h6>
+        <h6>Total Price: Rs:{{grandtotal}}</h6>
+        <h6>Status: {{status}}</h6>
+        <div class="p-4" style="position: absolute; top: 33%; right: 0; transform: translateY(-50%);">
+          <a href="/orderProductView?id={{_id}}" class="btn btn-outline-info"><h6>Details</h6></a>
+          {{!-- {{#if returnstatus}} --}}
+          {{!-- <div class="p-4" style="position: absolute; top: 39%; right: 0;margin-top: 75px; transform: translateY(-50%);">
+            <button onclick="location.href='/addtowallet/{{_id}}/{{grandtotal}}'" class="btn btn-primary">Return</button>
+          </div> --}}
+          {{!-- {{else}} --}}
+          {{!-- <div class="p-4" style="position: absolute; top: 39%; right: 0;margin-top: 75px; transform: translateY(-50%);">
+            <h6 class="text-warning">Processing</h6>
+          </div> --}}
+          {{!-- {{/if}} --}}
+        {{!-- </div>
+      </div>
+    </div>
+  </div>
+  {{/each}} --}} 
+

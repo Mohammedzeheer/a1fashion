@@ -1,0 +1,163 @@
+  <style>.wallet {
+  /* wallet design styles */
+}
+
+.wallet-price-label {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #000;
+  padding: 5px;
+  border-radius: 5px;
+}
+</style>
+ 
+
+ <div class="container rounded bg-white mt-5 mb-5">
+    <form onkeyup="return userProfileValiddation()" onsubmit="return userProfileValiddation()" name="Submission"  action="/userAddress" method="post">
+    <div class="row">
+
+        <div class="col-md-3 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+            <span class="font-weight-bold">{{userdatas.uname}}</span><span class="text-black-50">{{userdatas.email}}</span><span> </span></div>
+      
+    <div class="wallet">
+        <div class="wallet-price-label">My wallet :₹ {{userdatas.wallet}}</div>
+        <!-- other wallet design elements -->
+    </div>
+      
+        </div>
+   
+
+
+
+
+
+
+
+        <div class="col-md-5 border-right">
+            <div class="p-3 py-5">
+
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                   <a href="/groupAddress"><button type="button" class="btn btn-outline-secondary btn-rounded" data-mdb-ripple-color="dark">View Address</button></a>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Add Profile</h4>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-6"><label class="labels">Name</label><input type="text" name="name" class="form-control" placeholder="first name" value=""></div>
+                    <div class="col-md-6"><label class="labels">Lastname</label><input type="text" name="lastname"  class="form-control" value="" placeholder="Last name"></div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12"><label class="labels">Email</label><input type="text" name="email" class="form-control" placeholder="enter email" value=""></div>
+                    <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text" name="phonenumber" class="form-control" placeholder="enter phone number" value=""></div>
+                    <div class="col-md-12"><label class="labels">Address </label><input type="text" name="address" class="form-control" placeholder="enter address" value=""></div>
+                </div>
+               
+                
+            </div>
+        </div>
+        <div class="col-md-4">
+                <div class="row mt-5">
+                    <div class="col-md-6"><label class="labels">Country</label><input type="text" name="country" class="form-control" placeholder="country" value=""></div>
+                    <div class="col-md-6"><label class="labels">State/Region</label><input type="text" name="state" class="form-control" value="" placeholder="state"></div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-md-6"><label class="labels">District</label><input type="text" name="district" class="form-control" placeholder="district" value=""></div>
+                    <div class="col-md-6"><label class="labels">Postcode</label><input type="text" name="postcode" class="form-control" value="" placeholder="postcode"></div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="m-3" style="color: red;" id="erorr"></div>
+               </div>
+                
+           <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Save Profile</button></div>
+                {{!-- <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" onclick="submitForm()">Save Profile</button> </div> --}}
+ 
+        </div>
+    </div>
+  </form>
+ </div>
+</div>
+</div>
+ 
+<script src="javascript/userProfileValidation.js"></script>
+
+
+ <style>body {
+    background: #f3f2ee
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color:#f3f2ee
+}
+
+.profile-button {
+    background: #3a3c3d;
+    box-shadow: none;
+    border: none
+}
+
+.profile-button:hover {
+    background: #682773;
+}
+
+.profile-button:focus {
+    background: #674e6b;
+    box-shadow: none
+}
+
+.profile-button:active {
+    background: #3a3c3d;
+    box-shadow: none
+}
+
+.back:hover {
+    color: #682773;
+    cursor: pointer
+}
+
+.labels {
+    font-size: 11px
+}
+
+.add-experience:hover {
+    background: #BA68C8;
+    color: #fff;
+    cursor: pointer;
+    border: solid 1px #BA68C8
+}</style>
+ 
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert@2"></script>
+<script>
+  function submitForm() {
+    swal({
+      title: "Save Profile?",
+      text: "Are you sure you want to save your profile?",   
+      buttons: ["Cancel", "Save"],
+      dangerMode: true,
+    })
+    .then((willSave) => {
+      if (willSave) {
+        // submit the form
+        document.getElementById("profile-form").submit();
+      }
+    });
+  }
+</script>
+
+<!-- Small modal -->
+<div id="saveaddress" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+     	<div class="d-flex justify-content-center align-items-center m-2"> <img  style="width:4rem;height:4rem" src="http://goactionstations.co.uk/wp-content/uploads/2017/03/Green-Round-Tick.png" alt=""></div>
+		<h6 class="d-flex justify-content-center align-items-center m-2 success">Saved your Address!</h6>
+    </div>
+  </div>
+</div>

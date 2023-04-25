@@ -1,0 +1,281 @@
+
+{{!-- <style>
+
+#e-mail {
+	height: 50px;
+}
+
+input.btn-green {
+	background-color: #64FFDA;
+	padding-left: 0px;
+	padding-right: 0px;
+	color: #000000;
+	font-weight: bold;
+	height: 50px;
+}
+
+</style> --}}
+
+
+
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__text">
+                        <h4>Check Out</h4>
+                        <div class="breadcrumb__links">
+                            <a href="/">Home</a>
+                            <a href="/shop">Shop</a>
+                            <span>Check Out</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+  
+    <!-- Checkout Section Begin -->
+    <section class="checkout spad">
+        <div class="container">
+
+
+            <div class="checkout__form">
+                <form id="checkout-form" action="" method="" novalidate>
+                    <div class="row">
+                        <div class="col-lg-8 col-md-6">
+             
+
+                             {{!-- {{#passaddresslist}} --}}
+                            {{!-- <a href="/groupAddress" class="mb-4"><button type="button" class="btn btn-outline-dark">Dark</button></a> --}}
+                            <h6 class="coupon__code"><span class="fa fa-address-card"></span><a href="/groupAddress">Click here select address</a></h6>
+                            <h6 class="checkout__title">Billing Details</h6>
+                            <div class="row">
+                       
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>Fist Name<span>*</span></p>
+                                        <input type="text" class="form-control" required name="firstname" value="{{passaddresslist.name}}">
+                                        <div class="invalid-feedback">Please Enter Name</div>
+    
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>Last Name<span></span></p>
+                                        <input type="text"  name="lastname" value="{{passaddresslist.lastname}}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="checkout__input">
+                                <p>Country<span>*</span></p>
+                                <input type="text" class="form-control" required name="country" value="{{passaddresslist.country}}">
+                                <div class="invalid-feedback">Enter Country</div>
+                            </div>
+                            <div class="checkout__input">
+                                <p>Address<span>*</span></p>
+                                <input type="text" class="form-control"  required name="address" value="{{passaddresslist.address}}" placeholder="Street Address" class="checkout__input__add">
+                                <div class="invalid-feedback">Enter Address</div>
+                                {{!-- <input type="text" placeholder="Apartment, suite, unite ect (optinal)"> --}}
+                            </div>
+                            <div class="checkout__input">
+                                <p>District<span>*</span></p>
+                                <input type="text" class="form-control"  required name="district" value="{{passaddresslist.district}}">
+                                <div class="invalid-feedback">Enter District</div>
+                            </div>                        
+                              <div class="checkout__input">
+                                <p>State<span>*</span></p>
+                                <input type="text" class="form-control"  required name="state" value="{{passaddresslist.state}}">
+                               <div class="invalid-feedback">Enter State</div>
+                            </div>
+                            <div class="checkout__input">
+                                <p>Postcode / ZIP<span>*</span></p>
+                                <input type="text" class="form-control"  required name="pincode" value="{{passaddresslist.postcode}}">
+                                 <div class="invalid-feedback">Enter Zip code</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>Phone<span>*</span></p>
+                                        <input type="text" class="form-control" required name="phonenumber" value="{{passaddresslist.phonenumber}}">
+                                        <div class="invalid-feedback">Enter Phonenumber</div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>Email<span>*</span></p>
+                                        <input type="text" class="form-control"  required name="email" value="{{passaddresslist.email}}">
+                                         <div class="invalid-feedback">Enter Email</div>
+                                    </div>
+                                </div>
+                            </div>                         
+                        </div>
+
+
+                        <div class="col-lg-4 col-md-6">
+
+                            <div class="checkout__order">
+                                <h4 class="order__title">Your order</h4>
+                                <div class="checkout__order__products">Product<span>Total</span></div>
+                                <ul class="checkout__total__products justify-content: space-between">
+                          {{#each checkoutList}}
+                    
+                                    <li >{{productname}} <a style="width:30px" class="ml-2" >{{quantity}}<a><a class="ml-2" >{{productprice}}</a><span class="ml-4">{{totalprice}}</span></li>
+                          {{/each}}      
+                                    {{!-- <li>02. German chocolate <span>$ 170.0</span></li>
+                                    <li>03. Sweet autumn <span>$ 170.0</span></li>
+                                    <li>04. Cluten free mini dozen <span>$ 110.0</span></li> --}}
+                                </ul>
+                                <ul class="checkout__total__all">
+                                     <li>Subtotal ₹ <span>Rs:{{subtotal}}</span></li>
+                                     <li>Shipping charge ₹ <span>Rs: 66</span></li>
+                                     <li>Coupon Discount ₹<span>Rs:{{discountvalue}}</span></li>
+                                     <li>Total ₹<span name="grandtotal">Rs:{{grandtotal}}</span></li>
+                                </ul>
+                        
+                               
+                         {{!-- here payment checbox start--}}
+                                <div class="checkout__input__checkbox">
+                                    <label for="payment" >
+                                        Cash on Delivery
+                                        <input type="checkbox" name="paymentmethod" id="payment" value="COD">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <div class="checkout__input__checkbox">
+                                    <label for="paypal">
+                                        UPI
+                                        <input type="checkbox" name="paymentmethod" id="paypal" value="PayPal">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                 <div class="checkout__input__checkbox">
+                                    <label for="wallet">
+                                        wallet
+                                        <input type="checkbox" name="paymentmethod" id="wallet" value="wallet">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <p id="myElement" style="color:red"></p>
+                                <button type="submit" class="site-btn">PLACE ORDER</button>
+                             </div>
+                             {{!-- {{/passaddresslist}} --}}
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <!-- Checkout Section End -->
+
+
+ {{!-- CHECK BOX SCRIPT  --}}
+<script>
+    $("input:checkbox").on('click', function() {
+  var $box = $(this);
+  if ($box.is(":checked")) {
+    var group = "input:checkbox[name='" + $box.attr("name") + "']";
+    $(group).prop("checked", false);
+    $box.prop("checked", true);
+  } else {
+    $box.prop("checked", false);
+  }
+});
+</script>
+
+
+{{!-- ajax libraray --}}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script>
+       const form = document.querySelector('#checkout-form');
+        $("#checkout-form").submit((e) => {
+            e.preventDefault()
+            if(!form.checkValidity()){}
+            else{
+            $.ajax({
+                url: '/ordered',
+                method: 'post',
+                data: $('#checkout-form').serialize(),
+                success: (response) => {
+                    
+                    if (response.status==true) {                         
+                        razorpayPayment(response.order)
+                    }
+                  
+                    else if (response.status == false) {
+                     document.getElementById("myElement").innerHTML = "My wallet has less money than the price I need to pay";
+                     console.log("hello iam inner html")
+                     }
+                      else if(response.status=='checkboxSelectError') {
+                          document.getElementById("myElement").innerHTML = "Please Select Payment Method";               
+                      }
+                    else{
+                         console.log("Redirecting to orderSuccessfully page...");
+                         location.replace('/orderSuccessfully')
+                    
+                    }
+                }
+            })
+        }
+        form.classList.add('was-validated')
+        })
+
+
+        function razorpayPayment(order) {
+            var options = {
+                "key": "rzp_test_AnSGgqj6oAMuma", // Enter the Key ID generated from the Dashboard
+                "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                "currency": "INR",
+                "name": "A1 Fashion", //your business name
+                "description": "Test Transaction",
+                "image": "https://example.com/your_logo",
+                "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+               
+                "handler": function (response) {
+                    
+                    verifyPayment(response,order)
+                },
+                "prefill": {
+                    "name": "Gaurav Kumar", //your customer's name
+                    "email": "gaurav.kumar@example.com",
+                    "contact": "9000090000"
+                },
+                "notes": {
+                    "address": "Razorpay Corporate Office"
+                },
+                "theme": {
+                    "color": "#3399cc"
+                }
+            };
+            var rzp1 = new Razorpay(options);
+             rzp1.open();
+        }
+
+        function verifyPayment(payment,order){
+            $.ajax({
+                url:'/verify-payment',
+                data:{
+                    payment,
+                    order
+                },
+                method:'post',
+                success:(response)=>{
+                    if(response.PaymentSuccess==true){
+                        location.href="/orderSuccessfully"
+                    }else{
+                        alert('payment failed')
+                    }
+                }                            
+            })
+        }
+    </script>
+
+
+ 
+
+
+   

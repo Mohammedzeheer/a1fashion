@@ -1,0 +1,93 @@
+        <div class="content-page">
+          <div class="table-title">
+            <div class="row">
+              <div class="col-sm-10">
+                <h4>Order <b>Details</b></h4>
+              </div>
+              <div class="col-sm-2">
+                {{!-- <button type="button" class="btn btn-info add-new btn-sm m-2"><i class="fa fa-plus"></i><a
+                    style="color:white" href="/addproductpage">Add New</a></button> --}}
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-lg-12">
+               <div style="overflow-y: scroll;">
+                <table id="datatable" class="table data-table table-striped table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Ordered User</th>
+                      <th>Delivery Address</th>
+                      <th>Ordered Date</th>
+                      <th>Payment Method</th>
+                      <th>Total Price</th>
+                      <th>Status</th>
+                      <th>Product Detail</th>
+                      {{!-- <th>Price</th>--}}
+                      <th>Action</th> 
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {{#each orderview}}
+                    <tr>
+                      {{!-- <td><img style="width: 90px; height: 90px;" src="/productimage/{{productimage.[0]}}" alt=""></td>
+                      --}}
+                      <td>{{ordereduser}}</td>
+                      <td>
+                        {{deliveryaddress.firstname}},</br>{{deliveryaddress.address}},</br>Pin:{{deliveryaddress.pincode}},</br>{{deliveryaddress.district}},
+                        {{deliveryaddress.state}},{{deliveryaddress.country}},</br>{{deliveryaddress.phonenumber}},</br>{{deliveryaddress.email}}
+                      </td>
+                      <td>{{orderdate}}</td>
+                      <td>{{paymentmethod}}</td>
+                      <td>{{grandtotal}}</td>
+                      <td>{{status}}</td>
+
+                      <td><a class="view" href="/orderProductView/{{_id}}"><i class="material-icons">&#x1F441;</i></a> </td>
+
+
+                      <td>  
+
+                         {{#if (eq status "Order Processing")}}
+                          <div class="p-2">
+                          <button onclick="location.href='/confirmOrder/{{_id}}'" class="btn btn-success btn-sm">Confirm Order</button>
+                          <button onclick="location.href='/cancelOrderAdmin/{{_id}}/{{grandtotal}}'" class="btn btn-danger btn-sm">Cancel Order</button>
+                           </div>
+                        {{/if}}
+
+
+                        {{#if (eq status "Shipped")}}
+                          <div class="p-2">
+                          <button onclick="location.href='/cancelOrderAdmin/{{_id}}/{{grandtotal}}'" class="btn btn-danger btn-sm">Cancel Order</button>
+                           <button onclick="location.href='/makeDeliveredByAdmin/{{_id}}'" class="btn btn-success btn-sm">Delivered</button>
+                           </div>
+                        {{/if}}
+                      
+
+                        {{#if (eq status "Return Requested")}}
+                          <div class="p-2">
+                          <button onclick="location.href='/returnConfirm/{{_id}}/{{grandtotal}}'" class="btn btn-danger btn-sm"><i
+                           class="fas fa-undo"></i>Confirm Return</button>
+                          </div>                     
+                        {{/if}}
+
+
+                      </td>
+
+                    </tr>
+                    {{/each}}
+                  </tbody>
+                </table>
+              </div>
+             </div>
+            </div>
+          </div>
+
+        </div>
+        </div>
+
+
+        

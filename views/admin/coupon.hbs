@@ -1,0 +1,60 @@
+<div class="content-page">
+    <div class="table-title">
+        <div class="row">
+            <div class="col-sm-10">
+                <h4>Coupon <b>Details</b></h4>
+            </div>
+            <div class="col-sm-2">
+                <button type="button" class="btn btn-info add-new btn-sm m-2"><i class="fa fa-plus"></i><a
+                        style="color:white" href="/addCoupenPage">Add New</a></button>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                {{!-- <div style="height: 400px; overflow-y: scroll;"> --}}
+                    <table id="datatable" class="table data-table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Coupon Code</th>
+                                <th>Discount Type</th>
+                                <th>Discount Value</th>
+                                {{!-- <th>Maximum Discount Amount</th> --}}
+                                <th>Minimum Purchase</th>
+                                <th>Starting Date</th>
+                                <th>Expire Date</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {{#each coupentable}}
+                            <tr>         
+                                <td>{{couponcode}}</td>
+                                <td>{{discounttype}}</td>
+                                <td>{{discountvalue}}</td>
+                                {{!-- <td>{{maxdiscountamount}}</td> --}}
+                                <td>{{minpurchase}}</td>
+                                <td>{{startingdate}}</td>
+                                <td>{{expiredate}}</td>
+                                <td>{{status}}</td>
+
+                             
+                                <td>
+                                    {{!-- <a class="edit" href="/editCoupon/{{_id}}"><i class="material-icons">&#xE254;</i></a> --}}
+                                    <a class="delete" href="/deleteCoupon/{{_id}}" onclick="return confirm('Do you want to delete product')"><i
+                                            class="material-icons">&#xE872;</i></a>
+                                </td>
+                            </tr>
+                            {{/each}}
+                    </table>
+                {{!-- </div> --}}
+            </div>
+        </div>
+    </div>
+</div>

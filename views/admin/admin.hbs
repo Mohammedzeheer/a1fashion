@@ -1,0 +1,33 @@
+
+
+<div class="wrapper">
+        <div class="logo">
+          <img src="https://assets.nationbuilder.com/themes/5d1ad55ac2948011ce17704b/attachments/original/1553643295/login.png?1553643295"  alt="" >
+       </div>
+        <div class="text-center mt-4 name">
+            Admin
+        </div>
+        <form action="/signin" method="post" class="p-3 mt-3" >
+            <div class="form-field d-flex align-items-center">
+                <span class="far fa-user"></span>
+                <input type="text" name="adminname" id="adminname" placeholder="Admin Name">
+            </div>
+            <div class="form-field d-flex align-items-center">
+                <span class="fas fa-key"></span>
+                <input type="text" name="adminpassword" id="adminpassword" placeholder="Password">
+            </div>
+            <button type="submit" class="btn mt-3">Login</button>
+        </form>
+
+        <div class="text-center fs-6">
+            <a style="color:red">{{invalida}}</a>             
+            {{!-- <a href="#">Forget password?</a> or <a href="#">Sign up</a> --}}
+        </div>
+    </div>
+
+
+    
+
+
+
+

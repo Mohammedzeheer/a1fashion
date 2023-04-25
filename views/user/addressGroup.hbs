@@ -1,0 +1,81 @@
+<section class="address-section">
+  <div class="container">
+    <div class="row">
+      {{#each passAddress}}
+        {{#address}}
+        <div class="col-6 col-sm-6 col-md-4 col-lg-3 mb-4">
+        {{!-- <div class="col-12 col-sm-6 col-md-4 mb-4"> --}}
+          <div class="card address-card">
+            <div class="card-header address-header">
+              <h5 class="card-title address-title mb-0">Address</h5>
+            </div>
+            <div class="card-body address-body">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item"><b>Name:</b> {{name}} {{lastname}}</li>
+                <li class="list-group-item"><b>Email:</b> {{email}}</li>
+                <li class="list-group-item"><b>Phone:</b> {{phonenumber}}</li>
+                <li class="list-group-item"><b>Address:</b> {{country}}, {{state}}, {{district}}, {{postcode}}</li>
+              </ul>
+            </div>
+            <div class="card-footer address-footer">
+              <a href="/selectAddress/{{@index}}" class="btn btn-primary btn-sm address-btn">Confirm Address</a>
+            </div>
+          </div>
+        </div>
+        {{/address}}
+      {{/each}}
+    </div>
+  </div>
+</section>
+
+<style>
+  .address-section {
+    background-color: #f5f5f5;
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+
+  .address-card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,.05);
+  }
+
+  .address-header {
+    background-color: #f7f7f7;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    padding: 10px;
+  }
+
+  .address-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #555;
+    margin: 0;
+  }
+
+  .address-body {
+    padding: 10px;
+  }
+
+  .list-group-item {
+    font-size: 14px;
+    padding: 5px;
+    margin: 0;
+  }
+
+  .address-footer {
+    background-color: #f7f7f7;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    text-align: center;
+    padding: 10px;
+  }
+
+  .address-btn {
+    width: 100%;
+    font-size: 14px;
+    padding: 5px;
+  }
+</style>

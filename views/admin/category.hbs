@@ -1,0 +1,95 @@
+
+  
+ 
+
+
+{{!-- Add Category start --}}
+   
+        <div class="container">
+            <div class="row ">
+                <div class="col-lg-10 col-md-8 ml-auto">
+                    <div class="row align-items-center pt-md-5 mt-md-5 mb-5">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-title text-center mt-3">
+                                    <h3>Add Category</h3>
+                                </div>
+                                <div class="card-body">
+                                    <form action="/categoryadd" method="post">
+                                        <div class="form-group">
+                                            <label for="categoryname">Category Name:</label>
+                                            <input type="text" class="form-control" name="categoryname" id="categoryname"
+                                                placeholder="Enter Category Name">
+                                            <div class="invalid-feedback">Category Name Can't Be Empty</div>
+                                        </div>
+                                        
+                                        <div class="text-center fs-6">
+                                           <a style="color:red">{{catmsg}}</a>             
+                                        </div>
+                                        
+                                        <button class="btn btn-dark mt-5 mx-auto d-block" type="submit">Add Category</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+   
+{{!-- category add end --}}
+
+
+
+   
+{{!-- body start   --}}
+<section>
+ <div class="content-page">
+    <div class="container">
+        <div class="table-wrapper">
+            <div class="table-title">               
+                <div class="row">
+                    <div class="col-sm-10"><h4>Category <b>Details</b></h4></div>                   
+                </div>
+            </div>
+            <table id="datatable" class="table data-table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>category Name</th>
+                        <th>Actions</th>
+                        <th>Status</th>
+                        
+                    </tr>
+                </thead>
+                <tbody> 
+
+                    {{#each categorytable}}   
+                        <tr>
+                             <td name="categoryname">{{categoryname}}</td>
+                             <td>                        
+                                <a class="edit"  href="/categoryEdit/{{_id}}"><i class="material-icons">&#xE254;</i></a>                            
+                                {{!-- <a onclick="return confirm('Do you want delete Category')" class="delete" href="/categoryDelete/{{_id}}" ><i class="material-icons">&#xE872;</i></a>                                                   --}}
+                            </td> 
+
+                             {{#if status}} 
+                                <td class="text-center"><a onclick="return confirm('Do You Want To unlist This Category ')" class="text-success"  href="/unlistCategory?id={{_id}}"><button type="button" class="btn btn-danger">Un list</button></a></td>
+                                {{else}} 
+                                <td class="text-center"><a onclick="return confirm('Do You Want To list This Category ')"  class="text-danger"  href="/listCategory?id={{_id}}"><button type="button" class="btn btn-success ">List</button></a></td>
+                             {{/if}}
+                                         
+                        </tr>
+                    {{/each}}
+                 
+                </tbody>
+            </table>
+        </div>
+    </div>  
+  </div>
+</section>
+{{!-- body start   --}}
+
+
+
+
+  
+ 

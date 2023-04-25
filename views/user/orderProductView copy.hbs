@@ -1,0 +1,29 @@
+{{#each userOrderProductList}}
+    <div class="row">
+        <div class="container">
+            <div class="col-12">
+                <div class="p-3 ">
+                    <div class="d-flex align-item-center"
+                        style="background-color: aliceblue; border: 1px solid black; padding: 10px; position: relative;">
+                        <div class="p-3">
+                            <img src="/productimage/{{productimage.[0]}}" alt="" width="150px">
+                        </div>
+                         
+                        <div class="p-0" >
+                           <br>
+                           <br>
+                            <h6 class="text-muted"> product Name:<span class="text-dark">{{productname}}</span></h6 class="text-muted">
+                            {{!-- <h6 class="text-muted">Brand:<span  class="text-dark">{{productbrand}}</span></h6 class="text-muted"> --}}
+                             <h6 class="text-muted">Quantity:<span  class="text-dark">{{quantity}}</span></h6 class="text-muted">
+                            <h6 class="text-muted">Price:Rs:<span class="text-dark">{{productprice}}</span></h6 class="text-muted">
+                            <h6 class="text-muted">Total:Rs:<span class="text-dark">{{totalprice}}</span></h6 class="text-muted">                             
+                        </div>            
+                        </div>             
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+
+     make this goo looking card like ecommerse  order  product view

@@ -1,0 +1,78 @@
+<style>
+    .order-card {
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        overflow: hidden;
+    }
+    .order-card img {
+        max-width: 80%;
+    }
+    .order-card .card-body {
+        padding: 20px;
+    }
+    .order-card .product-details {
+        margin-bottom: 20px;
+    }
+    .order-card .product-details h6 {
+        margin: 0;
+        font-size: 14px;
+        font-weight: normal;
+        line-height: 1.5;
+        color: #555;
+    }
+    .order-card .product-details h6 span {
+        color: #333;
+        font-weight: bold;
+    }
+    .order-card .product-price {
+        margin-bottom: 10px;
+    }
+    .order-card .product-price h6 {
+        margin: 0;
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 1.5;
+        color: #333;
+    }
+    .order-card .product-price h6 span {
+        color: #f00;
+        font-weight: normal;
+    }
+    @media only screen and (min-width: 768px) {
+        .order-card .card-body {
+            display: flex;
+        }
+        .order-card .product-image {
+            width: 200px;
+            padding-right: 20px;
+        }
+        .order-card .product-details {
+            flex-grow: 1;
+        }
+    }
+</style>
+<div class="container">
+    {{#each userOrderProductList}}
+    <div class="row">
+        <div class="col-12">
+            <div class="order-card">
+                <div class="card-body">
+                    <div class="product-image">
+                        <img src="/productimage/{{productimage.[0]}}" alt="{{productname}}">
+                    </div>
+                    <div class="product-details">
+                        <h6>Product Name: <span style="color:#007bff">{{productname}}</span></h6>
+                        <h6>Quantity: <span style="color:#28a745">{{quantity}}</span></h6>
+                    </div>
+                    <div class="product-price">
+                        <h6>Price: <span>Rs. <span style="color:#f00">{{productprice}}</span></span></h6>
+                        <h6>Total: <span>Rs. <span style="color:#f00">{{totalprice}}</span></span></h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</div> 

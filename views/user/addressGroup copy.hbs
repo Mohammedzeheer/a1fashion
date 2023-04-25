@@ -1,0 +1,82 @@
+
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__text">
+                        <h4>Address</h4>
+                        <div class="breadcrumb__links">
+                            <a href="/">Home</a>
+                            <a href="/shop">Shop</a>
+                            <span>Address</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+     
+
+    {{!-- BUTTON ADD SECTION BEGAN  --}}
+
+        <section>
+            <div class="container">
+                <div class="row">   
+                   <a href="/userprofile"> <button type="submit" class="site-btn m-3">Add Address</button>    </a>         
+                     {{!-- <button class="btn btn-primary" type="button">Button</button>     --}}
+                </div>
+            </div>
+
+
+
+        </section>
+
+     {{!-- BUTTON ADD SECTION END  --}}
+
+
+
+    <!-- Shopping Cart Section Begin -->
+    {{!-- <section class="shopping-cart spad"> --}}
+        <section>
+            <div class="container-fluid">
+                {{!-- <div> --}}
+                {{!-- <div class="justify-content-center"> --}}
+                    <div class="row">
+    
+                        {{#each passAddress}}
+                        {{#address}}
+
+                        <div class="col-12 col-sm-6 col-md-4 m-3rem">
+                            <div class="m-3">
+                            <div class="card" style="width: 20em;">
+                                <div class="card-header">
+                                    Address
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item"><b>Name:</b> {{name}}</li>
+                                    <li class="list-group-item"><b>Last Name:</b> {{lastname}}</li>
+                                    <li class="list-group-item"><b>Email:</b> {{email}}</li>
+                                    <li class="list-group-item"><b>Phonenumber:</b> {{phonenumber}}</li>
+                                    <li class="list-group-item"><b>Country:</b> {{country}}</li>
+                                    <li class="list-group-item"><b>State:</b> {{state}}</li>
+                                    <li class="list-group-item"><b>District:</b> {{district}}</li>
+                                    <li class="list-group-item"><b>Postcode:</b> {{postcode}}</li>
+                                   <a href="/selectAddress/{{@index}}"> <button type="button" class="btn btn-outline-dark btn-rounded btn-sm"
+                                        data-mdb-ripple-color="dark">Confirm Address To checkout</button></a>
+    
+                                </ul>
+                            </div>
+                            </div>
+                        </div>
+    
+                        {{/address}}
+                        {{/each}}
+    
+                    {{!-- </div> --}}
+                </div>
+            </div>
+        </section>
+    <!-- Adress Cart Section End -->
+

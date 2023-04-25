@@ -1,0 +1,261 @@
+
+{{!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'></link>  
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script> --}}
+
+
+
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__text">
+                        <h4>Shopping Cart</h4>
+                        <div class="breadcrumb__links">
+                            <a href="/">Home</a>
+                            <a href="/shop">Shop</a>
+                            <span>Shopping Cart</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Shopping Cart Section Begin -->
+    <section class="shopping-cart spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="shopping__cart__table">
+                         {{#if cartList}}
+                        <table >
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                          {{/if}}
+
+
+
+                            {{#each cartList}}
+                            
+                                <tr>
+                                    {{!-- <td class="product__cart__item"> --}}
+                                     <td>
+                                        <div class="product__cart__item__pic">
+                                            <img style="width:5rem;height:5rem;" src="/productimage/{{productimage.[0]}}" alt="">
+                                        <span style="color:red" id="{{_id}}outOfStock"></span>
+                                        </div> 
+                                        <div class="product__cart__item__text">
+                                            <h6>{{productname}}</h6>
+                                            <h5>{{productprice}}</h5>
+                                        </div>
+                                       
+                                    </td>
+
+
+                <td>
+                 <button class="btn-minus btn-sm" onclick="updateQuantity('decrement', '{{_id}}','{{stock}}')">-</i></button>
+                  <span class="quantity" data-id="{{_id}}">{{quantity}}</span>
+                  <button class="btn-plus btn-sm" onclick="updateQuantity('increment', '{{_id}}','{{stock}}')">+</i></button>
+                </td>
+
+             
+                           <td class="cart__price" id="{{_id}}totalprice">{{totalprice}}</td>
+                           <td><a href="/deleteCart?id={{_id}}" onclick="event.preventDefault(); deleteCart('{{_id}}');" class="fa fa-trash" style="font-size: 20px; color:red"></a></td>                                                             
+
+                                </tr>
+
+                       {{/each}}                               
+                              
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="continue__btn">
+                                <a href="/shop">Continue Shopping</a>
+                            </div>
+                       </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+           {{#if cartList}}    
+                    <div class="cart__discount">
+                        <h6>Discount codes</h6>
+                        <form action="/userTryCouponCode" method="post">
+                            <input type="text" placeholder="Coupon code" name="couponcode" >
+                            <button type="submit">Apply</button>
+                        </form>       
+                         <a style="color:red">{{couponError}}</a>             
+                    </div>
+
+                       
+                    <div class="cart__total">
+                        <h6>Cart total</h6>
+                        <ul>
+                            <li>Subtotal ₹<span id="subtotal">{{subtotal}}</span></li>
+                            <li>Shipping Charge ₹<span>: 66</span></li>
+                            <li>Coupon Discount ₹<span>{{discountvalue}}</span></li>
+                            <li>Total ₹<span id="grandtotal">{{grandtotal}}</span></li>
+                        </ul>
+                        <a href="/checkout" class="primary-btn">Proceed to checkout</a>
+                    </div>
+                 {{/if}}
+                  
+                    
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Shopping Cart Section End -->
+
+
+
+
+
+ {{!-- delete ajax work code  --}}
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert@2"></script>
+
+<script>
+    function deleteCart(productId) {
+  swal({
+    title: "Do you want to delete?",
+    text: "Are you sure you want to delete this product?",
+   
+    buttons: ["Cancel", "Ok"],
+    dangerMode: true,
+  })
+  .then((shouldDelete) => {
+    if (shouldDelete) {
+      window.location.href = "/deleteCart?id=" + productId;
+    }
+  });
+}
+</script>
+ {{!-- icon: "warning", --}}
+
+<style>
+    .swal-modal {
+  width: 400px !important;
+  height: 200px !important;
+}
+
+.swal-text {
+  font-size: 16px !important;
+}
+
+.swal-text {
+  font-size: 16px !important;
+}
+</style>
+
+
+<script>
+
+  function updateQuantity(operation, productId,stock) {
+    const quantityElem = document.querySelector(`.quantity[data-id="${productId}"]`);
+    let quantity = parseInt(quantityElem.innerText);
+    let stockPlusOne=stock+1
+      console.log("hjghjhkkjkkjljklklll stock",stock)
+    console.log("hjghjhkkjkkjljklklll stock",stockPlusOne)
+    if (operation === 'increment' && quantity<stockPlusOne) {
+      quantity++;
+    } else if (operation === 'decrement' && quantity > 1) {
+      quantity--;
+    }
+
+    updateQuantityAjax(quantity, productId,stock);
+    quantityElem.innerText = quantity;
+  }
+
+</script>
+
+
+<script>
+    function updateQuantityAjax(count, productId,stock) {
+    $.ajax({
+      url: '/updateQuantity/' + productId,
+      data: {
+        products: productId,
+        count: count,
+        stock
+      },
+      method: 'put',
+      success: (response) => {
+        console.log(response.data);
+        if (response.status) {
+          var data = response.data;
+          $(`#${productId}totalprice`).html(data.totalprice);
+          $('#subtotal').html(data.subtotal);
+          $('#grandtotal').html(data.grandtotal);
+          $(`#${productId}outOfStock`).html(data.nodata)
+        }
+        else{
+             console.log("out of stock jsomn")
+          $(`#${productId}outOfStock`).html(response.message)
+         
+        }
+      }
+    })
+  }
+</script>
+
+
+
+ {{!-- css for plus and minus button --}}
+<style>
+    .btn-minus, .btn-plus {
+  display: inline-block;
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 15px;
+  padding: 3px 6px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-minus:hover, .btn-plus:hover {
+  background-color: #0062cc;
+}
+
+.quantity {
+  display: inline-block;
+  font-size: 17px;
+  font-weight: bold;
+  padding: 0 7px;
+}
+
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
