@@ -22,7 +22,7 @@ const orderSchema= new mongoose.Schema({
     status:{type:String,required:true},
     returnstatus:{type:Boolean,default:true},
     salesdate:{type:String,required:false},
-    
+    reason:{type:String,required:false}   
 })
   
 const ordercollection =new mongoose.model("orderdatas", orderSchema);

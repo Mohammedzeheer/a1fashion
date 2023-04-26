@@ -40,12 +40,15 @@ userrouter.get('/orderUser',orderGet.orderUserPage)
 userrouter.get('/orderProductView',orderGet.orderProductView)
 userrouter.get('/orderSuccessfully',orderGet.orderSuccessfully)
 
-userrouter.get('/addtoreturn/:id/:grandtotal',userget.addToReturn)
+//userrouter.get('/addtoreturn/:id/:grandtotal',userget.addToReturn)
+userrouter.get('/addtoreturn',userget.addToReturn)
+
 
 userrouter.get('/cancelOrderAdmin/:id/:grandtotal',userget.cancelOrderByAdmin)
 userrouter.get('/returnConfirm/:id/:grandtotal',userget.returnConfirm)
 
-userrouter.get('/cancelOrder/:id/:grandtotal',userget.cancelOrder)
+// userrouter.get('/cancelOrder/:id/:grandtotal',userget.cancelOrder)
+userrouter.get('/cancelOrder',userget.cancelOrder)
 
 userrouter.get('/confirmOrder/:id',userget.confirmOrder)
 userrouter.get('/makeDeliveredByAdmin/:id',userget.makeDeliveredByAdmin)

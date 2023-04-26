@@ -211,7 +211,7 @@ const resendotp = async function (req, res, next) {
 let categorydropdown
 const productshowuser = async function (req, res, next) { 
  try {
- const itemsPerPage = 6;
+    const itemsPerPage = 6;
     const page = parseInt(req.query.page) || 1;
     const totalItems = await productcollection.countDocuments();
     const totalPages = Math.ceil(totalItems / itemsPerPage);
@@ -326,18 +326,18 @@ const confirmOrder= async (req,res,next)=>{
 
 
 //<<<<<<<<<<<<---ADMIN MAKE STATUS SHIPPED TO DELIVERD --->>>>>>>>>>>>>>>>>>>> 
-const makeDeliveredByAdmin= async (req,res,next)=>{
-  try{
-      id=req.session.userid    
-      confirmid = req.params.id
-     
-      await ordercollection.updateOne({_id:confirmid},{status:"Delivered"})
-     
+const makeDeliveredByAdmin = async (req, res, next) => {
+  try {
+    id = req.session.userid
+    confirmid = req.params.id
+
+    await ordercollection.updateOne({ _id: confirmid }, { status: "Delivered" })
+
     res.redirect('/order')
-   }
-   catch(error){
+  }
+  catch (error) {
     next()
-   }
+  }
 }
 
 
@@ -345,11 +345,13 @@ const makeDeliveredByAdmin= async (req,res,next)=>{
 //<<<<<<<<<<<<---USER REQUESTING TO RETURN --->>>>>>>>>>>>>>>>>>>> 
 const addToReturn = async (req,res,next)=>{
   try{
-     id=req.session.userid
-     addWalletPrice=req.params.grandtotal     
-     returnid = req.params.id
+     id=req.session.userid  
+    //  returnid = req.params.id
+     returnid = req.query.id
+     returnreason = req.query.reason
+     console.log("============",returnreason)
      
-     await ordercollection.updateOne({_id:returnid},{status:"Return Requested"})
+     await ordercollection.updateOne({_id:returnid},{status:"Return Requested",reason:returnreason})
      await ordercollection.updateOne({_id:returnid},{returnstatus:false})
       
    res.redirect('/orderUser')
@@ -362,24 +364,25 @@ const addToReturn = async (req,res,next)=>{
 //<<<<<<<<<<<<---CANCEL ORDER BY USER --->>>>>>>>>>>>>>>>>>>> 
 const cancelOrder = async (req,res,next)=>{
   try{
- 
      id=req.session.userid
-     addWalletPrice=req.params.grandtotal     
-     returnid = req.params.id
+     returnid = req.query.id
+     cancelreason = req.query.reason
 
    const data=  await ordercollection.find({_id:returnid})
+  
    const paymentCheck=data[0].paymentmethod
+   const grandtotal=data[0].grandtotal
 
    if(paymentCheck=="PayPal" || paymentCheck=="wallet" ){
-    await usercollection.updateOne({_id:id},{$inc:{wallet:addWalletPrice}})
+    await usercollection.updateOne({_id:id},{$inc:{wallet:grandtotal}})
    }  
-     await ordercollection.updateOne({_id:returnid},{status:"Order Canceled"})
+ 
+     await ordercollection.updateOne({_id:returnid},{status:"Order Canceled",reason:cancelreason})
      await ordercollection.updateOne({_id:returnid},{returnstatus:false})
-      
    res.redirect('/orderUser')
   }
   catch(error){
-   next()
+   res.render('404')
   }
 }
 
@@ -397,7 +400,7 @@ const returnConfirm = async (req,res,next)=>{
     res.redirect('/order')
    }
    catch(error){
-    next()
+    res.render('404')
    }
 }
 
@@ -420,7 +423,7 @@ const cancelOrderByAdmin = async (req,res,next)=>{
    res.redirect('/order')
   }
   catch(error){
-   next()
+  res.render('404')
   }
 }
 
@@ -453,7 +456,7 @@ const welcomeMessageUser= async function (req, res, next) {
    res.redirect('/')
   //  res.json({ status: true })
   } catch (error) {
-     next()
+    res.render('404')
   }
 }
 
@@ -475,8 +478,30 @@ module.exports = {
 
 
  ////TESTING CODE
+//  const cancelOrder = async (req,res,next)=>{
+//   try{
+ 
+//      id=req.session.userid
+//      addWalletPrice=req.params.grandtotal     
+//      returnid = req.params.id
+//      console.log("rfgrfguyrtuyrtguyrtu return id ",returnid)
 
-  //SEARCH 
+//    const data=  await ordercollection.find({_id:returnid})
+//    const paymentCheck=data[0].paymentmethod
+
+//    if(paymentCheck=="PayPal" || paymentCheck=="wallet" ){
+//     await usercollection.updateOne({_id:id},{$inc:{wallet:addWalletPrice}})
+//    }  
+//      await ordercollection.updateOne({_id:returnid},{status:"Order Canceled"})
+//      await ordercollection.updateOne({_id:returnid},{returnstatus:false})
+      
+//    res.redirect('/orderUser')
+//   }
+//   catch(error){
+//    next()
+//   }
+// }
+//   //SEARCH 
 
 //   //<<<<<<<<<<<<<<SEARCH START>>>>>>>>>>>>>>>>
 // app.get('/SHOP', (req, res) => {

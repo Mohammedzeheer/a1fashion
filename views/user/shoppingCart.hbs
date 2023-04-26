@@ -173,8 +173,6 @@
     const quantityElem = document.querySelector(`.quantity[data-id="${productId}"]`);
     let quantity = parseInt(quantityElem.innerText);
     let stockPlusOne=stock+1
-      console.log("hjghjhkkjkkjljklklll stock",stock)
-    console.log("hjghjhkkjkkjljklklll stock",stockPlusOne)
     if (operation === 'increment' && quantity<stockPlusOne) {
       quantity++;
     } else if (operation === 'decrement' && quantity > 1) {

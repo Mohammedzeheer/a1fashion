@@ -32,7 +32,7 @@ let msg
         const shippedCount= await ordercollection.findOne({status:"Shipped"}).count()
         const revenue=await ordercollection.aggregate([{$match:{status:"Delivered"}},{$group:{_id:null,sum:{$sum:"$grandtotal"}}},{$project:{_id:0}}])
         totalRevenue=revenue[0].sum
-        res.render('index',{userCount,blockedUser,orderedCount,totalRevenue,shippedCount})
+        res.render('index',{userCount,blockedUser,orderedCount,totalRevenue,shippedCount,admin:true})
       } catch (error) {
         next()
       }
