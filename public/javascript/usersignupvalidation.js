@@ -3,6 +3,7 @@ function validateform(){
    var phonenumber=document.Submission.phonenumber.value;
    var email=document.Submission.email.value;
    var password=document.Submission.password.value;  
+   var confirmpassword=document.Submission.confirmpassword.value; 
    var regex=/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/gm;
    var phoneregex = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/
    
@@ -63,7 +64,18 @@ function validateform(){
            err.innerHTML='Your password must contain at least one digit'
            return false
        }
+       
+        if(confirmpassword=="")
+        {
+        err.innerHTML='Confirm password is Empty';
+            return false;
+        } 
 
+       if(password!=confirmpassword)
+       {
+        err.innerHTML='Confirm password is wrong';
+           return false;
+       }
            
 return true;
 }

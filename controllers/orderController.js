@@ -1,8 +1,9 @@
 const cartCollection = require('../models/cartModel');
-const ordercollection=require('../models/orderModel')
-const {v4:uuidv4} = require('uuid'); 
+const ordercollection=require('../models/orderModel');
 const usercollection = require('../models/usermodel');
 const productcollection = require('../models/productmodel');
+const {v4:uuidv4} = require('uuid'); 
+
 const Razorpay = require('razorpay');
 
 var instance = new Razorpay({
