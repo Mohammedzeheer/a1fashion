@@ -2,14 +2,15 @@ const cartCollection = require('../models/cartModel');
 const ordercollection=require('../models/orderModel');
 const usercollection = require('../models/usermodel');
 const productcollection = require('../models/productmodel');
-const {v4:uuidv4} = require('uuid'); 
+const {v4:uuidv4} = require('uuid');        //AUTO ID REQUIRE
+const Razorpay = require('razorpay');   //RAZORPAY REQUIRE
 
-const Razorpay = require('razorpay');
-
+    /// <<<<<<<<<<<<< RAZORPAY INSTANCE >>>>>>>>>>>>>
 var instance = new Razorpay({
   key_id: process.env.razarPayId,
   key_secret: process.env.razorPaySecret
 });
+
 
 let userName
 const saveOrder= async function (req,res, next){
@@ -17,13 +18,13 @@ const saveOrder= async function (req,res, next){
 }
 
 
-//here the function of order post
+
+  /// <<<<<<<<<<<<< ALL ORDER POST FUNCTION WORKS HERE   >>>>>>>>>>>>>>>>>>>
 let orders
 const userPostOrderListPass = async function (req, res, next) {
   try {
     couponId=req.session.coupon
-    
-    // let status = req.body.paymentmethod === "COD" ? "Placed" : "Pending";
+  
     let status ="Order Processing"
     let delivery = {
       firstname: req.body.firstname,
@@ -76,7 +77,6 @@ const userPostOrderListPass = async function (req, res, next) {
         if (err) {
           console.log(err)
         } else {
-          // coupensid = req.session.coupen
           res.json({ status: true, order: order })
         }
       })
@@ -121,13 +121,14 @@ const userPostOrderListPass = async function (req, res, next) {
       res.json({status:"checkboxSelectError"})
     }
   } catch (error) {
-    console.log(error)
-    next()
+    console.log(error);
+    res.render('404')
   } 
   }
   
 
 
+    /// <<<<<<<<<<<<< REAZOR PAY VERIFY FUNCTION WORKS FROM AJAX CHECKOUT PAGE  >>>>>>>>>>>>>>>>>>>
   const userGetverifypayment = async function (req, res, next) {
     try {
       user = req.session.userid
@@ -153,12 +154,7 @@ const userPostOrderListPass = async function (req, res, next) {
         let dt = new Date()
         order.deliverydate = new Date(dt.setDate(dt.getDate() + 7))
         order.deliverydate = order.deliverydate.toLocaleString()
-        // order.product.paymentid = uuidv4()
-  
-        // for (i = 0; i < order.product.length; i++) {
-        //   order.product[i].paymentid = req.body['payment[razorpay_payment_id]']
-        // }
-        // console.log("hdfdg 9999999999999999");
+
         await ordercollection.insertMany([order])
         await cartCollection.deleteOne({ userId: req.session.userid })
         req.session.user.order = null;
@@ -169,12 +165,10 @@ const userPostOrderListPass = async function (req, res, next) {
       res.redirect('/')
     }
     } catch (error) {
-      console.log(error)
+      console.log(error);
+      res.render('404')
     }
   }
-
-
-
 
 
 
@@ -182,10 +176,10 @@ const userPostOrderListPass = async function (req, res, next) {
 const orderAdminView= async(req,res,next)=>{
   try {
     let orderview=await ordercollection.find().sort({orderdate:-1}).lean()
-    res.render('order',{orderview,admin:true})
+    res.render('order',{orderview,admin:true,orders:true})
   } catch (error) {
-    console.log(error)
-    next()
+    console.log(error);
+    res.render('404')
   }
 }
 
@@ -205,7 +199,7 @@ const orderAdminProductView= async (req,res,next)=>{
      res.render('orderProduct',{productlist,admin:true})
   } catch (error) {
     console.log(error)
-    next() 
+    res.render('404')
   }
 }
 
@@ -219,12 +213,11 @@ const orderUserPage=async(req,res,next)=>{
     res.render('orderUser',{user:true,userorder,userName})
   } catch (error) {
     console.log(error)
-    next()
+    res.render('404')
   }
 }
 
-
-// orderproduct view page user side
+//<<<<<<<<<<<<<<-- USER SIDE ORDER PRODUCT VIEW PAGE-->>>>>>>>>>>>>>>>>>>>>>>
 const orderProductView=async (req,res,next)=>{
   try{    
      userName=req.session.user
@@ -235,11 +228,12 @@ const orderProductView=async (req,res,next)=>{
       res.render('orderProductView',{userOrderProductList,user:true,userName})
 
   }catch(error){
-    console.log(error);
+    console.log(error)
+    res.render('404')
   }
 }
 
-//ORDER SUCCESSFULLY PAGE RENDER 
+////<<<<<<<<<<<<<<--ORDER SUCCESSFULLY PAGE RENDER -->>>>>>>>>>>>>>>>>>>>>>>
 const orderSuccessfully=async (req,res,)=>{
   try {
     res.render('orderSuccessfully',{user:true,userName})
@@ -249,26 +243,27 @@ const orderSuccessfully=async (req,res,)=>{
 }
 
 
-////ADMIN GET SALES REPORT - THIS FUNCTION WORKS HERE 
+ ////<<<<<<<<<<<<<<--ADMIN GET SALES REPORT PAGE -->>>>>>>>>>>>>>>>>>>>>>>
 const salesReport=async (req,res,next)=>{
   try {   
     let salesReportView= await ordercollection.aggregate([{$match:{status:"Delivered"}},{ $sort: { deliverydate: -1 } }])
     if(req.session.report)
     {
       salesReportView = req.session.report
-      res.render('salesReport',{admin:true,salesReportView})
+      res.render('salesReport',{admin:true,salesReportView,salesreport:true})
     }
     else{
-      res.render('salesReport',{admin:true,salesReportView})
+      res.render('salesReport',{admin:true,salesReportView,salesreport:true})
     }  
   } catch (error) {
+    console.log(error);
     res.render('404')
   }
 }
 
 
 
-
+////<<<<<<<<<<<<<<--DAILY MONTHLY YEARLY SALES REPORT FUNCTION SUBMIT HERE  -->>>>>>>>>>>>>>>>>>>>>>>
 const salesReportDailyMonthly= async (req,res,next)=>{
   try {
   
@@ -323,6 +318,7 @@ const salesReportDailyMonthly= async (req,res,next)=>{
 
 }
    catch (error) {
+    console.log(error);
     res.render('404')
     
   }

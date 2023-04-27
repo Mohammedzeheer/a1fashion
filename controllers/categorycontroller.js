@@ -5,29 +5,21 @@ const categorycollection=require('../models/categorymodel')
 
 
 
-  //CATEGORY TABLE PAGE
+  // /// <<<<<<<<<<<<< CATEGORY TABLE PAGE  >>>>>>>>>>>>>>>>>>>
   const categorypage=async function(req, res, next) {
     try {
       let categorytable= await categorycollection.find().lean()    
-      res.render('category',{categorytable,admin:true,catmsg});
+      res.render('category',{categorytable,admin:true,catmsg,category:true});
       catmsg=null;
     } catch (error) {
-      next()
+      console.log(error)
+      res.render('404')
     }
     }
 
-    ///category add by admin
-    // var catmsg
-    // const categoryadd =async function(req,res,next){
-    //   const catdata={
-    //     categoryname:req.body.categoryname,
-    //   }    
-    //   await categorycollection.insertMany([catdata]) 
-    //   res.redirect('/category')
-    // }      
+ 
 
-
-   //CATEGORY ADD NEW
+   ///// <<<<<<<<<<<<< CATEGORY ADD NEW   >>>>>>>>>>>>>>>>>>>
    var catmsg
    const categoryadd =async function(req,res,next){
     try {
@@ -44,12 +36,13 @@ const categorycollection=require('../models/categorymodel')
        } 
     } catch (error) {
       console.log(error)
+      res.render('404')
     }
    }  
  
    
 
-    //CATEGORY DELETE CODE
+    //// <<<<<<<<<<<<< CATEGORY DELETE CODE   >>>>>>>>>>>>>>>>>>>
     const categoryDelete= function(req,res){
       try {
         let catdlt=req.params.id
@@ -60,22 +53,24 @@ const categorycollection=require('../models/categorymodel')
          deletecategory(); 
       } catch (error) {
         console.log(error)
+        res.render('404')
       } 
     }
 
 
-   //CATEGORY EDIT PAGE
+   ///// <<<<<<<<<<<<< CATEGORY EDIT PAGE >>>>>>>>>>>>>>>>>>>
    const categoryEdit = async function(req,res,next){
     try {
       let id=req.params.id     
       const cE=await categorycollection.findOne({_id:id})    
       res.render('categoryEdit',{id:cE._id,categoryname:cE.categoryname,admin:true}); 
     } catch (error) {
-      next()
+      console.log(error)
+      res.render('404')
     }
 }
 
-  // CATEGORY UPDATE 
+  ///// <<<<<<<<<<<<< CATEGORY UPDATE  >>>>>>>>>>>>>>>>>>>
   const categoryUpdate= async (req,res,next)=>{
     try {
       var catupdateid=req.params.id
@@ -91,12 +86,13 @@ const categorycollection=require('../models/categorymodel')
         }}).then(()=>{res.redirect('/category')})
        }
     } catch (error) {
-      next()
+      console.log(error)
+        res.render('404')
     }   
   }
 
 
-    ///LIST CATEGORY BY ADMIN 
+    /// <<<<<<<<<<<<< LIST CATEGORY BY ADMIN  >>>>>>>>>>>>>>>>>>>
     const listcategory=async(req,res)=>{
         try {        
           const categoryData= await categorycollection.findOne({_id:req.query.id})
@@ -106,11 +102,12 @@ const categorycollection=require('../models/categorymodel')
            res.redirect('/category')
          }
         } catch (error) {
-            console.log(error);        
+          console.log(error)
+          res.render('404')    
         }}
 
       
-      /// UN BLOCK USER BY ADMIN 
+      ////// <<<<<<<<<<<<< UN BLOCK USER BY ADMIN >>>>>>>>>>>>>>>>>>>
       const unlistcategory=async(req,res)=>{
         try {        
           const categoryData= await categorycollection.findOne({_id:req.query.id})
@@ -120,10 +117,12 @@ const categorycollection=require('../models/categorymodel')
            res.redirect('/category')
          }
         } catch (error) {
-            console.log(error);        
+          console.log(error)
+        res.render('404')      
         }}
         
 
+        //module exports
   module.exports={
     categorypage,
     categoryadd,categoryDelete,categoryEdit,categoryUpdate,

@@ -55,7 +55,7 @@
           <div class="data-scrollbar" data-scroll="1">
               <nav class="iq-sidebar-menu">
                   <ul id="iq-sidebar-toggle" class="side-menu">
-                      <li class="active sidebar-layout">
+                      <li {{#if dashboard }}class="active"{{/if}} class="sidebar-layout">
                           <a href="/index" class="svg-icon">
                               <i class="">
                                   <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -72,7 +72,7 @@
 
 
                     {{!-- userprofile --}}
-                       <li class=" sidebar-layout">
+                       <li {{#if useractive}}class="active"{{/if}} class=" sidebar-layout">
                           <a href="/users" class="svg-icon">
                               <i class="">
                                   <svg class="svg-icon" id="iq-user-1-1" xmlns="http://www.w3.org/2000/svg"
@@ -99,7 +99,7 @@
 
 
          {{!-- products managements --}}
-                   <li class="sidebar-layout">
+                   <li {{#if products}} class="active"{{/if}}class="sidebar-layout">
                           <a href="#app5" class="collapsed svg-icon" data-toggle="collapse" aria-expanded="false">
                               <i>
                                   <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -150,7 +150,7 @@
 
 
            {{!-- category --}}
-                       <li class=" sidebar-layout">
+                       <li {{#if category}}class="active"{{/if}} class=" sidebar-layout">
                           <a href="/category" class="svg-icon">
                               <i class="">
                                    <svg class="svg-icon" id="iq-ui-1-3" width="18" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -163,7 +163,7 @@
 
 
 
-                          <li class=" sidebar-layout">
+                          <li {{#if orders }}class="active"{{/if}}class=" sidebar-layout">
                                   <a href="/order" class="svg-icon">
                                       <i class="">
                                           <svg class="svg-icon" width="18" id="iq-ui-1-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -174,7 +174,7 @@
                               </li>
 
 
-                            <li class=" sidebar-layout">
+                            <li {{#if banner}} class="active"{{/if}} class=" sidebar-layout">
                                   <a href="/bannerPage" class="svg-icon">
                                       <i class="">
                                           <svg class="svg-icon" width="18" id="iq-ui-1-15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -197,7 +197,7 @@
                               </li>    --}}
 
 
-                   <li class="sidebar-layout">
+                   <li {{#if coupon}} class="active"{{/if}} class="sidebar-layout">
                             <a href="#app6" class="collapsed svg-icon" data-toggle="collapse" aria-expanded="false">
                                 <i>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -244,19 +244,7 @@
 
 
 
-
-             {{!-- order --}}
-                    {{!-- <li class=" sidebar-layout">
-                          <a href="/Order" class="svg-icon">
-                              <i class="">
-                                   <svg class="svg-icon" id="iq-ui-1-5" width="18" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" style="stroke-dasharray: 90, 110; stroke-dashoffset: 0;"></path>
-                                   </svg>
-                              </i><span class="ml-2">Orders</span>
-                          </a>
-                       </li>  --}}
-
-                         <li class=" sidebar-layout">
+                         <li {{#if salesreport}} class="active"{{/if}} class=" sidebar-layout">
                                   <a href="/salesReport" class="svg-icon">
                                      <i class="">
                                           <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -19,6 +19,7 @@ const userprofile = function (req, res, next) {
     }
     res.render('userProfile', { user: true,userName,userdatas });
     } catch (error) {
+        console.log(error)
         res.render('404')
     }  
   }
@@ -43,8 +44,8 @@ const userAddress= async(req,res,next)=>{
         }
         res.redirect('/userProfile')
     } catch (error) {
-        //res.render('404')
-       console.log(error); 
+        console.log(error)
+        res.render('404')
     }
 }
 
@@ -58,7 +59,8 @@ const groupAddress = async(req,res,next)=>{
         let passAddress=await AddressCollection.findOne({user:userId})  
         res.render('addressGroup',{user:true,userName,passAddress})
     } catch (error) {
-        console.log(error);       
+        console.log(error)
+       res.render('404')     
     }
 }
 
@@ -88,6 +90,7 @@ const checkoutPage = async function (req, res, next) {
         res.render('checkout',{user:true,userName,passaddresslist,checkoutList,subtotal,discountvalue,grandtotal});
       
     } catch (error) {
+        console.log(error)
         res.render('404')
     }
 }
@@ -107,7 +110,8 @@ const selectAddress = async(req,res,next)=>{
   
         res.redirect('/checkout')
     } catch (error) {
-        console.log(error);       
+        console.log(error)
+    res.render('404')     
     }
 }
 
@@ -116,6 +120,7 @@ const ordered= (req,res,next)=>{
     try {
         res.render('orderSuccefully', {user:true,userName})
     } catch (error) {
+        console.log(error)
         res.render('404')
     }
   

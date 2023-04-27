@@ -1,27 +1,33 @@
- const couponcollection =require ('../models/couponModel')
- const usercollection=require('../models/usermodel')
+ const couponcollection =require ('../models/couponModel')  //COUPON MODEL
+ const usercollection=require('../models/usermodel')   //USER MODEL
 
 
-
+ 
+  /// <<<<<<<<<<<<< COUPON PAGE RENDER FUNCTION >>>>>>>>>>>>>>>>>>>
  const coupenPage= async (req,res,next)=>{
    try {
       let coupentable= await couponcollection.find().lean() 
       console.log("coupen table ddddd",coupentable)   
-      res.render('coupon',{coupentable,admin:true})
+      res.render('coupon',{coupentable,admin:true,coupon:true})
    } catch (error) {
-      next()
+      console.log(error);
+      res.render('404')
    }
  }
  
+   
+    /// <<<<<<<<<<<<< ADD COUPON FORM RENDER  >>>>>>>>>>>>>>>>>>>
  const addCoupenPage=(req,res,next)=>{
    try {
       res.render('addCoupon',{admin:true}) 
    } catch (error) {
-      next()
+      console.log(error);
+      res.render('404')
    }
  }
 
 
+    /// <<<<<<<<<<<<< ADD COUPON FUNCTION SUBMIT BUTTON  >>>>>>>>>>>>>>>>>>>
  const addCoupenPost=async (req,res,next)=>{
       try {
          const coupondata={
@@ -36,11 +42,14 @@
          await couponcollection.insertMany([coupondata])
          res.render('addCoupon',{admin:true}) 
       } catch (error) {
-         next()
+         console.log(error);
+         res.render('404')
       }   
  }
 
 
+     
+    /// <<<<<<<<<<<<< USER CHECKING IN COUPON INUT FEALD >>>>>>>>>>>>>>>>>>>
 const userTryCouponCode=async(req,res,next)=>{
     try {
       const couponId = req.body.couponcode
@@ -71,22 +80,27 @@ const userTryCouponCode=async(req,res,next)=>{
        res.redirect('/shoppingCart')
       }            
      catch (error) {
+      console.log(error);
       res.render('404')
          
     }
    }
 
+   
+    /// <<<<<<<<<<<<< DELETE COUPON BY ADMIN FUNCTION  >>>>>>>>>>>>>>>>>>>
 const deleteCoupon= async (req,res,next)=>{ 
    try {
       let coupondlt=req.params.id    
          await couponcollection.deleteOne({_id:coupondlt})    
          res.redirect('/coupenPage');
    } catch (error) {
-      next()
+      console.log(error);
+      res.render('404')
    }      
 }
 
 
+    /// <<<<<<<<<<<<< MODULE EXPORTS  >>>>>>>>>>>>>>>>>>>
  module.exports={
     coupenPage,addCoupenPage,addCoupenPost,userTryCouponCode,
     deleteCoupon

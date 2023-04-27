@@ -30,7 +30,8 @@ const indexpage = async function (req, res, next) {
     res.render('userhome', { user: true, userName ,producttable,bannerShow,totalPages,currentPage: page});
 
   } catch (error) {
-    next()
+    console.log(error)
+    res.render('404')
   }
    
 }
@@ -46,7 +47,12 @@ const loginpage = function (req, res, next) {
 
 // USER sign PAGE GET ---------------------------------
 const signupPage = function (req, res, next) {
-  res.render('usersignup', { userlogin: true});
+  try {
+    res.render('usersignup', { userlogin: true});
+  } catch (error) {
+    console.log(error)
+    res.render('404')
+  }
 }
 
 
@@ -82,7 +88,8 @@ const userlogin = async function (req, res, next) {
         res.redirect('/login')       
       } 
    } catch (error) {
-      next()
+    console.log(error)
+    res.render('404')
    }
 }
 
@@ -113,7 +120,8 @@ try {
   userexist()
 }
   catch (error) {
-   next();
+    console.log(error)
+    res.render('404')
   }
 } 
   
@@ -128,7 +136,8 @@ const otppage = function (req, res, next) {
     res.render('otp', { otp: true, otperror });
     otperror = ""
   } catch (error) {
-    next()
+    console.log(error)
+    res.render('404')
   }
 }
 
@@ -162,7 +171,8 @@ const otpcheck = async function (req, res, next) {
       }
     })
    } catch (error) {
-      next()
+    console.log(error)
+    res.render('404')
    }
 }
 
@@ -187,7 +197,8 @@ const otpsubmit = async function (req, res, next) {
       res.redirect('/otp')
     }
   } catch (error) {
-    next()
+    console.log(error)
+    res.render('404')
   }
 }
 
@@ -199,7 +210,8 @@ const resendotp = async function (req, res, next) {
     await otpcheck();
     res.redirect('/otp')
   } catch (error) {
-    next()
+    console.log(error)
+    res.render('404')
   } 
 }
 
@@ -222,7 +234,8 @@ const productshowuser = async function (req, res, next) {
   res.render('shop', { producttable, categorydropdown, user: true, userName,totalPages,currentPage: page});
 
  } catch (error) {
-  next()
+  console.log(error)
+    res.render('404')
  }
 }
   
@@ -244,26 +257,26 @@ const productshowuser = async function (req, res, next) {
         res.redirect("/shop")
        } 
     } catch (error) {
-      next()
+      console.log(error)
+    res.render('404')
     }
   }
 
 
 
    /// SHOP DETAIL PAGE SHOW ------------------------------------
-   
-const shopdetails = async function (req, res, next) {
+  const shopdetails = async function (req, res, next) {
   try {
     let shopdetailtable = await productcollection.findOne({ _id: req.query.id })
     const { _id,productcategory,productname, productimage ,productprice,description} = shopdetailtable
     res.render('shopDetails', {_id,productcategory, productimage,productname,productprice,description, user: true, userName, });
   
   } catch (error) {
-    next()
+    console.log(error)
+    res.render('404')
   }
 }
    
-
 
 
 //ABOUT PAGE RENDER HERE 
@@ -271,7 +284,7 @@ const aboutpage = function (req, res, next) {
   try {
     res.render('about', { user: true ,userName});
   } catch (error) {
-    next()
+    res.render('404')
   } 
 }
 
@@ -280,7 +293,8 @@ const contactPage = function (req, res, next) {
   try {
     res.render('contact', { user: true,userName});
   } catch (error) {
-    next()
+    console.log(error)
+    res.render('404')
   }
  
 }
@@ -290,7 +304,8 @@ const blogPage = function (req, res, next) {
   try {
     res.render('blog', { user: true ,userName });
   } catch (error) {
-    next()
+    console.log(error)
+    res.render('404')
   }
 }
 
@@ -309,7 +324,7 @@ const fortesting = function (req, res, next) {
 }
 
 
-//confirm order by admin
+//<<<<<<<<<<<<<<<<<<<<<<  CONFIRM ORDER BY ADMIN   >>>>>>>>>>
 const confirmOrder= async (req,res,next)=>{
   try{
       id=req.session.userid    
@@ -320,7 +335,8 @@ const confirmOrder= async (req,res,next)=>{
     res.redirect('/order')
    }
    catch(error){
-    next()
+    console.log(error)
+    res.render('404')
    }
 }
 
@@ -336,7 +352,8 @@ const makeDeliveredByAdmin = async (req, res, next) => {
     res.redirect('/order')
   }
   catch (error) {
-    next()
+    console.log(error)
+    res.render('404')
   }
 }
 
@@ -349,7 +366,6 @@ const addToReturn = async (req,res,next)=>{
     //  returnid = req.params.id
      returnid = req.query.id
      returnreason = req.query.reason
-     console.log("============",returnreason)
      
      await ordercollection.updateOne({_id:returnid},{status:"Return Requested",reason:returnreason})
      await ordercollection.updateOne({_id:returnid},{returnstatus:false})
@@ -357,7 +373,8 @@ const addToReturn = async (req,res,next)=>{
    res.redirect('/orderUser')
   }
   catch(error){
-   next()
+    console.log(error)
+    res.render('404')
   }
 }
 
@@ -382,11 +399,12 @@ const cancelOrder = async (req,res,next)=>{
    res.redirect('/orderUser')
   }
   catch(error){
-   res.render('404')
+    console.log(error)
+    res.render('404')
   }
 }
 
-//<<<<<<<< admin return confirmed  >>>>>>>>>
+//<<<<<<<< ADMIN RETURN CONFIRMATION FUNCTION >>>>>>>>>
 const returnConfirm = async (req,res,next)=>{
    try{
       id=req.session.userid
@@ -400,12 +418,13 @@ const returnConfirm = async (req,res,next)=>{
     res.redirect('/order')
    }
    catch(error){
+    console.log(error)
     res.render('404')
    }
 }
 
 
-//<<<<<<<< cancel order by admin  when admin return confirmed  >>>>>>>>>
+//<<<<<<<< CANCEL ORDER BY ADMIN >>>>>>>>>
 const cancelOrderByAdmin = async (req,res,next)=>{
   try{
      id=req.session.userid
@@ -423,12 +442,13 @@ const cancelOrderByAdmin = async (req,res,next)=>{
    res.redirect('/order')
   }
   catch(error){
-  res.render('404')
+    console.log(error)
+    res.render('404')
   }
 }
 
 
-//welcome message to user 
+ //<<<<<<<< WELCOME MESSAGE TO USER >>>>>>>>>
 const welcomeMessageUser= async function (req, res, next) {
   try {
    userEmail=req.body.email
@@ -456,6 +476,7 @@ const welcomeMessageUser= async function (req, res, next) {
    res.redirect('/')
   //  res.json({ status: true })
   } catch (error) {
+    console.log(error)
     res.render('404')
   }
 }
@@ -474,47 +495,6 @@ module.exports = {
    
 }
 
-
-
-
- ////TESTING CODE
-//  const cancelOrder = async (req,res,next)=>{
-//   try{
- 
-//      id=req.session.userid
-//      addWalletPrice=req.params.grandtotal     
-//      returnid = req.params.id
-//      console.log("rfgrfguyrtuyrtguyrtu return id ",returnid)
-
-//    const data=  await ordercollection.find({_id:returnid})
-//    const paymentCheck=data[0].paymentmethod
-
-//    if(paymentCheck=="PayPal" || paymentCheck=="wallet" ){
-//     await usercollection.updateOne({_id:id},{$inc:{wallet:addWalletPrice}})
-//    }  
-//      await ordercollection.updateOne({_id:returnid},{status:"Order Canceled"})
-//      await ordercollection.updateOne({_id:returnid},{returnstatus:false})
-      
-//    res.redirect('/orderUser')
-//   }
-//   catch(error){
-//    next()
-//   }
-// }
-//   //SEARCH 
-
-//   //<<<<<<<<<<<<<<SEARCH START>>>>>>>>>>>>>>>>
-// app.get('/SHOP', (req, res) => {
-//   const query = req.query.q; // get the search query from the request
-//   let filteredProducts = products; // initialize the filteredProducts array with all products
-//   if (query) {
-//     filteredProducts = products.filter(product => {
-//       return product.name.toLowerCase().includes(query.toLowerCase()); // filter products based on name
-//     });
-//   }
-//   res.render('SHOP', {products: filteredProducts, searchQuery: query}); // pass the filtered products and search query to the template
-// });
-// //<<<<<<<<<<<<<<SEARCH END >>>>>>>>>>>>>>>>
 
 
 

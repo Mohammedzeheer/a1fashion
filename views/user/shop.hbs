@@ -106,6 +106,7 @@
                     </div>
                     {{/if}}{{/if}}
                     {{/each}}
+                   <div style="color: red; font-size: 24px;" id="itemnotfound"></div>
                 </div>
 
 
@@ -192,8 +193,11 @@
     var productName = productCards[i].querySelector(".product__item__text h6").textContent.toLowerCase();
     if (productName.indexOf(searchInput) > -1) {
       productCards[i].style.display = "";
+      document.getElementById("itemnotfound").innerHTML = ''
     } else {
       productCards[i].style.display = "none";
+      document.getElementById("itemnotfound").innerHTML = 'Item Not Found'
+
     }
   }
 }

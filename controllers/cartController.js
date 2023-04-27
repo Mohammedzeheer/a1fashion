@@ -9,81 +9,82 @@ const couponcollection=require('../models/couponModel')
 const { render } = require('express/lib/response')
 // const { products } = require('./productcontroller')
 
+
+//CART PAGE RENDER 
 const shopCart= async(req,res,next)=>{
     try {
         res.render('shoppingCart',{user:true})     
     } catch (error) {
-        next()
+      console.log(error)
+      res.render('404')
     }
 }
 
 ///SHOP CART Page here appear and this function works
 let userName
 let userId
- const userGetShopCart= async (req, res,next) => {
-   try {
-       userName=req.session.user
-       userId=req.session.userid
-       couponError=req.session.couponError
-  
-   const cartDataList = await cartCollection.find({userId:userId}).populate("products.productId").lean();
+const userGetShopCart = async (req, res, next) => {
+  try {
+    userName = req.session.user
+    userId = req.session.userid
+    couponError = req.session.couponError
 
-   console.log("cartDataList",cartDataList)
-   
-   if(!cartDataList.length){
-    res.render('emptyCart',{user:true,userName})
-  }
-  let [{ products }] = cartDataList;
-  if(products.length == 0){
-    res.render('emptyCart',{user:true,userName})
-  }
-  else{
-   const cartList = products.map(({productId,quantity,totalprice}) => ({   
-       _id:productId._id,
-       productname:productId.productname, 
-       productprice: productId.productprice,
-       productimage: productId.productimage,
-       stock:productId.stock,
-       quantity,
-       totalprice,            
-}))
-    req.session.cartList=cartList
-   const takeOnlyTotalprice = products.map(({totalprice}) => ({   
-     totalprice,            
-   }))
+    const cartDataList = await cartCollection.find({ userId: userId }).populate("products.productId").lean();
 
-   const subtotal = takeOnlyTotalprice.reduce((total,num)=>total+num.totalprice,0)
-   req.session.subtotal=subtotal
-   let grandtotal
-    const coupondiscount = await couponcollection.findOne({couponcode:req.session.coupon})
-    console.log("coupen discout addff",coupondiscount)
-    discountvalue=0
-     if(coupondiscount)
-     {
-       discountvalue=coupondiscount.discountvalue
-       grandtotal=subtotal+66-discountvalue
+    console.log("cartDataList", cartDataList)
 
-     }
-    else{
-     grandtotal=subtotal+66
+    if (!cartDataList.length) {
+      res.render('emptyCart', { user: true, userName })
     }
-   req.session.discountvalue=discountvalue
-   req.session.grandtotal=grandtotal
-  
-   res.render("shoppingCart", {user:true, userName, cartList ,subtotal,discountvalue,grandtotal,couponError})
- }
+    let [{ products }] = cartDataList;
+    if (products.length == 0) {
+      res.render('emptyCart', { user: true, userName })
+    }
+    else {
+      const cartList = products.map(({ productId, quantity, totalprice }) => ({
+        _id: productId._id,
+        productname: productId.productname,
+        productprice: productId.productprice,
+        productimage: productId.productimage,
+        stock: productId.stock,
+        quantity,
+        totalprice,
+      }))
+      req.session.cartList = cartList
+      const takeOnlyTotalprice = products.map(({ totalprice }) => ({
+        totalprice,
+      }))
 
-   } catch (error) {
-    res.render('404')
+      const subtotal = takeOnlyTotalprice.reduce((total, num) => total + num.totalprice, 0)
+      req.session.subtotal = subtotal
+      let grandtotal
+      const coupondiscount = await couponcollection.findOne({ couponcode: req.session.coupon })
+      console.log("coupen discout addff", coupondiscount)
+      discountvalue = 0
+      if (coupondiscount) {
+        discountvalue = coupondiscount.discountvalue
+        grandtotal = subtotal + 66 - discountvalue
+
+      }
+      else {
+        grandtotal = subtotal + 66
+      }
+      req.session.discountvalue = discountvalue
+      req.session.grandtotal = grandtotal
+
+      res.render("shoppingCart", { user: true, userName, cartList, subtotal, discountvalue, grandtotal, couponError })
+    }
+
+  } catch (error) {
     console.log(error)
-   
+    res.render('404')
   }
 } 
 
 
 
 
- ///ADD TO CART  HERE WORKS
+ ///// <<<<<<<<<<<<< ADD TO CART FUNCTION  >>>>>>>>>>>>>>>>>>>
 const addToCart=async(req,res,next)=>{
     try {
       const productid=req.query.id;
@@ -110,7 +111,8 @@ const addToCart=async(req,res,next)=>{
       }
       
     } catch (error) {
-      next()
+      console.log(error)
+      res.render('404')
       
     }}
 
@@ -128,7 +130,8 @@ const addToCart=async(req,res,next)=>{
     //  res.json({status:true})
      res.redirect('/shoppingCart')
   } catch (error) {
-    next()
+    console.log(error)
+    res.render('404')
   }
 }
 
@@ -193,85 +196,11 @@ const updateQuantity = async (req, res) => {
       }    
    
   } catch (error) {
-    console.log(error);
+    console.log(error)
+    res.render('404')
   }
 };
 
 
-
+//MODULE EXPORTS
 module.exports={shopCart,addToCart,userGetShopCart,deleteFromcart,updateQuantity}
-
-
-// ///SHOP CART Page here appear and this function works
-// let userName
-// let userId
-//  const userGetShopCart= async (req, res,next) => {
-//    try {
-//        userName=req.session.user
-//        userId=req.session.userid
-//        couponError=req.session.couponError
-  
-//    const cartDataList = await cartCollection.find({userId:userId}).populate("products.productId").lean();
-
-//    console.log("cartDataList",cartDataList)
-   
-//    if(cartDataList == []){
-//     res.render('emptyCart',{user:true,userName})
-//   }
-//   const [{ products }] = cartDataList;
-//   if(products.length == 0){
-//     res.render('emptyCart',{user:true,userName})
-//   }
-//   // if(cartDataList){
-//     // if (Array.isArray(cartDataList.products) && cartDataList.products.length !=0 && cartDataList.products.length !=null ) {
-//    else{
-    
-
-//    const cartList = products.map(({productId,quantity,totalprice}) => ({   
-//        _id:productId._id,
-//        productname:productId.productname, 
-//        productprice: productId.productprice,
-//        productimage: productId.productimage,
-//        stock:productId.stock,
-//        quantity,
-//        totalprice,            
-// }))
-//     req.session.cartList=cartList
-//    const takeOnlyTotalprice = products.map(({totalprice}) => ({   
-//      totalprice,            
-//    }))
-
-//    const subtotal = takeOnlyTotalprice.reduce((total,num)=>total+num.totalprice,0)
-//    req.session.subtotal=subtotal
-//    let grandtotal
-//     const coupondiscount = await couponcollection.findOne({couponcode:req.session.coupon})
-//     console.log("coupen discout addff",coupondiscount)
-//     discountvalue=0
-//      if(coupondiscount)
-//      {
-//        discountvalue=coupondiscount.discountvalue
-//        grandtotal=subtotal+66-discountvalue
-
-//      }
-//     else{
-//      grandtotal=subtotal+66
-//     }
-//    req.session.discountvalue=discountvalue
-//    req.session.grandtotal=grandtotal
-  
-//    // console.log(cartList);
-//    res.render("shoppingCart", {user:true, userName, cartList ,subtotal,discountvalue,grandtotal,couponError})
-//  }
-// //  else{
-// //   res.render('emptyCart',{user:true,userName})
-// // }
-// // }
-// //  else {
-// //   res.render('emptyCart',{user:true,userName})
-// // }
-
-//    } catch (error) {
-//     console.log(error)
-//     next()
-//   }
-// } 

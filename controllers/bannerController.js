@@ -5,9 +5,10 @@ const bannerCollection=require('../models/bannerModel')
 const bannerPage = async (req,res,next)=>{
   try {
     let bannerTable=await bannerCollection.find().lean()
-    res.render('banner',{bannerTable,admin:true})
+    res.render('banner',{bannerTable,admin:true,banner:true})
   } catch (error) {
-    next()
+    console.log(error)
+    res.render('404')
   }
 }
 
@@ -17,6 +18,7 @@ const addBannerGet = async (req,res,next)=>{
     res.render('addBanner',{admin:true})
   } catch (error) {
     console.log(error)
+    res.render('404')
   } 
 }
 
@@ -28,16 +30,16 @@ const bannerAdd=async (req,res,next)=>{
     title:req.body.title,
     description:req.body.description,
     bannerimage:req.file.filename
-  } 
-  console.log("banerdata..fffffffffffffffffffffffff.....",bannerdata);     
+  }   
    await  bannerCollection.insertMany([bannerdata])
    res.redirect('/bannerPage')
  } catch (error) {
   console.log(error)
+  res.render('404')
  }
 }
 
-
+//MODULE EXPORTS
   module.exports={
     bannerPage,bannerAdd,addBannerGet
   }

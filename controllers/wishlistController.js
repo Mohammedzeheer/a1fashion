@@ -1,6 +1,4 @@
-const cartCollection=require('../models/cartModel')
 const mongoose = require('mongoose');
-const productcollection = require('../models/productmodel')
 const wishlistCollection=require('../models/wishlistModel')
 
 
@@ -26,7 +24,8 @@ var userId
   console.log(wishList);
    res.render("wishlist", {user:true, userName, wishList })
    } catch (error) {
-        next()
+    console.log(error)
+    res.render('404')
   }
 }
 
@@ -52,7 +51,8 @@ const addToWishlist=async(req,res,next)=>{
        }
 
     }catch(error){
-        next()
+      console.log(error)
+    res.render('404')
     }
 }
 
@@ -64,57 +64,10 @@ const deleteFromWishlist=async (req,res,next)=>{
        await wishlistCollection.updateOne({userId:userId},{$pull:{products:{productId:wishlistid}}}) 
        res.redirect('/wishlist')
     } catch (error) {
-      next()
+      console.log(error)
+    res.render('404')
     }
   }
 
 
 module.exports= {addToWishlist,GetWishlist,deleteFromWishlist}
-
-
-
-
-// const GetWishlist1=async(req,res)=>{
-//     try{
-//         const usersId=req.session.userid;
-//         wishlistdata=await wishlistCollection.findOne({userId:usersId}).populate("products.productId").lean()
-//         const stocks=await Promise.all(wishlistdata.products.map(async(i)=>{
-//             return stocks=await productcollection.findOne({_id:i.productId._id}).lean()
-//         }))
-//          res.render("wishlist",{user:true,stocks})
-//     }
-//     catch(error){
-//         console.log(error.message);
-//     }
-// }
-
-
-// const GetWishlist111= async (req, res,next) => {
-//   try {
-//       userName=req.session.user
-//       userId=req.session.userid
-//       console.log(userId);
- 
-//   const wishlistdata=await wishlistCollection.findOne({userId:userId}).populate("products.productId").lean()
-//   const [{ products }] = wishlistdata;
-
-//   if(wishlistdata){
-//    if(!wishlistdata.products[0]){
-//        res.render("emptyWishlist", {user:true, userName,}) 
-//    }
- 
-//   const wishList = products.map(({productId}) => ({   
-//       productname:productId.productname, 
-//       productprice:productId.productprice,
-//       productimage:productId.productimage,      
-// }))
-//   console.log(wishlistdata);
-//   res.render("wishlist", {user:true, userName, wishList })
-// }
-//  else{
-//    res.render("emptyWishlist", {user:true, userName,}) 
-//  }
-//   } catch (error) {
-//   next()
-//  }
-// }

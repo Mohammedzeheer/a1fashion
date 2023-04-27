@@ -34,7 +34,7 @@
                   <tbody>
                     {{#each orderview}}
                     <tr>
-                      {{!-- <td><img style="width: 90px; height: 90px;" src="/productimage/{{productimage.[0]}}" alt=""></td>
+              {{!-- <td><img style="width: 90px; height: 90px;" src="/productimage/{{productimage.[0]}}" alt=""></td>
                       --}}
                       <td>{{ordereduser}}</td>
                       <td>
@@ -50,14 +50,12 @@
 
 
                       <td>  
-
                         {{#if (eq status "Order Processing")}}
                         <div class="p-2">
                           <button onclick="location.href='/confirmOrder/{{_id}}'" class="btn btn-success btn-sm"
                             style="font-size: 11px; padding: 5px 5px; margin-bottom: 5px;">Confirm Order</button>
                           <button onclick="location.href='/cancelOrderAdmin/{{_id}}/{{grandtotal}}'" class="btn btn-danger btn-sm"
-                            style="font-size: 12px; padding: 5px 5px;">Cancel Order</button>
-                        
+                            style="font-size: 12px; padding: 5px 5px;">Cancel Order</button>                       
                         </div>
                         {{/if}}
 
@@ -76,9 +74,20 @@
                           </div>                     
                         {{/if}}
 
+                         {{#if (eq status "Return Confirmed")}}
+                          <div class="p-2">
+                                {{reason}}
+                          </div>                     
+                        {{/if}}
+
+                        {{#if (eq status "Order Canceled")}}
+                          <div class="p-2">
+                                 {{reason}}
+                          </div>                     
+                        {{/if}}
+                        
 
                       </td>
-
                     </tr>
                     {{/each}}
                   </tbody>
