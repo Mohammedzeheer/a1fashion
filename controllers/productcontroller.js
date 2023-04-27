@@ -1,5 +1,3 @@
-const usercollection = require('../models/usermodel')
-const admincollection = require('../models/adminmodel')
 const productcollection = require('../models/productmodel')
 const categorycollection = require('../models/categorymodel')
 const multer = require('multer')

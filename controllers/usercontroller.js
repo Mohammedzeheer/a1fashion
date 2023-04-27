@@ -15,7 +15,7 @@ let userName
 // let user
 
 
-////USER HOME PAGE --------------------------------------
+//<<<<<<<<<<<<<<    USER HOME PAGE   >>>>>>>>>>
 const indexpage = async function (req, res, next) {
   console.log(userName);
   try {
@@ -37,15 +37,14 @@ const indexpage = async function (req, res, next) {
 }
 
 
-
-// USER login PAGE GET ---------------------------------
+//<<<<<<<<<<<<<<    USER login PAGE GET   >>>>>>>>>>
 const loginpage = function (req, res, next) {
   res.render('userlogin', { userlogin: true, msg },);
   msg = null;
 }
 
 
-// USER sign PAGE GET ---------------------------------
+//<<<<<<<<<<<<<<   USER SIGN UP PAGE GET RENDER  >>>>>>>>>>
 const signupPage = function (req, res, next) {
   try {
     res.render('usersignup', { userlogin: true});
@@ -56,8 +55,7 @@ const signupPage = function (req, res, next) {
 }
 
 
-
-// USER LOGIN post and checking when click login button -------------------------
+//<<<<<<<<<<<<<<   USER LOGIN POST METHOD   >>>>>>>>>>
 let userID;
 const userlogin = async function (req, res, next) {
    try {
@@ -95,8 +93,8 @@ const userlogin = async function (req, res, next) {
 
 
 
-// USER registeration code --------------------------------------------
 
+//<<<<<<<<<<<<<<  USER SIGNUP POST    >>>>>>>>>>
 let data;
 const usersignup = function (req, res, next) {
 try {
@@ -127,9 +125,7 @@ try {
   
 
 
-
-/// OTP Get page --------------------------------------------------- 
-
+//<<<<<<<<<<<<<<  OTP PAGE RENDER   >>>>>>>>>>
 let otperror;
 const otppage = function (req, res, next) {
   try {
@@ -143,7 +139,8 @@ const otppage = function (req, res, next) {
 
 
 
-/// OTP post when click regist otp page display and this function work ------------------------
+
+//<<<<<<<<<<<<<<  WHEN USER SIGNUP OTP PAGE APPEAR AND THIS FUNCTION WORKS >>>>>>>>>>
 let OtpCode;
 const otpcheck = async function (req, res, next) {
    try {
@@ -177,8 +174,7 @@ const otpcheck = async function (req, res, next) {
 }
 
 
-// SUBMIT button OTP PAGE -----------------------------------------
-
+//<<<<<<<<<<<<<<  SUBMIT BUTTON OF OTP PAGE >>>>>>>>>>
 const otpsubmit = async function (req, res, next) {
   try {
     const check = req.body.otp;
@@ -204,7 +200,8 @@ const otpsubmit = async function (req, res, next) {
 
 
 
-// RESEND otp -------------------------------------------
+
+//<<<<<<<<<<<<<<  RESEND OTP   >>>>>>>>>>
 const resendotp = async function (req, res, next) {
   try {
     await otpcheck();
@@ -217,9 +214,7 @@ const resendotp = async function (req, res, next) {
 
 
 
-
-
-// SHOP PAGE display and products card showing from admin added -------------------------
+//<<<<<<<<<<<<<<  SHOP PAGE DISPLAY and products Showing from admin added  >>>>>>>>>>
 let categorydropdown
 const productshowuser = async function (req, res, next) { 
  try {
@@ -240,7 +235,8 @@ const productshowuser = async function (req, res, next) {
 }
   
 
-  ///FILTERING THE CATEGORY BASE------------------------------
+  
+  //<<<<<<<<<<<<<<<<<<<<<<  FILTERING PRODUCT CATEGORY BASE  >>>>>>>>>>
   const categoryFilter= async function (req,res,next){  
     try {
       const categoryname=req.query.catname
@@ -264,7 +260,7 @@ const productshowuser = async function (req, res, next) {
 
 
 
-   /// SHOP DETAIL PAGE SHOW ------------------------------------
+  //<<<<<<<<<<<<<<<<  SHOP DETAIL PAGE RENDER   >>>>>>>>>>
   const shopdetails = async function (req, res, next) {
   try {
     let shopdetailtable = await productcollection.findOne({ _id: req.query.id })
@@ -279,7 +275,7 @@ const productshowuser = async function (req, res, next) {
    
 
 
-//ABOUT PAGE RENDER HERE 
+//<<<<<<<<<<<<<<<<<  ABOUT PAGE RENDER  >>>>>>>>>>
 const aboutpage = function (req, res, next) {
   try {
     res.render('about', { user: true ,userName});
@@ -288,7 +284,7 @@ const aboutpage = function (req, res, next) {
   } 
 }
 
-///CONTACT PAGE RENDER 
+//<<<<<<<<<<<<<<<<<<  CONTACT PAGE RENDER  >>>>>>>>>>
 const contactPage = function (req, res, next) {
   try {
     res.render('contact', { user: true,userName});
@@ -299,7 +295,7 @@ const contactPage = function (req, res, next) {
  
 }
 
-//BLOG PAGE RENDER HERE 
+//<<<<<<<<<<<<<<<<<<<<<<  BLOG PAGE RENDER   >>>>>>>>>>
 const blogPage = function (req, res, next) {
   try {
     res.render('blog', { user: true ,userName });
@@ -310,7 +306,7 @@ const blogPage = function (req, res, next) {
 }
 
 
-/// USER logout ------------------------------------------
+//<<<<<<<<<<<<<<<<<<<<<< USER LOGOUT  >>>>>>>>>>
 const logout = function (req, res, next) {
   res.render('userhome', { user: true });
   userName = ""
@@ -483,7 +479,6 @@ const welcomeMessageUser= async function (req, res, next) {
 
 
 
-
 ///EXPORTS THE FUNCTION TO ROUTERS 
 module.exports = {
   indexpage, aboutpage, loginpage,
@@ -494,8 +489,3 @@ module.exports = {
   welcomeMessageUser
    
 }
-
-
-
-
-

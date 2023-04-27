@@ -36,6 +36,9 @@
                 <h6 style="font-size: 16px; color: #333;">Status: 
                    <span class="badge badge-success">{{status}}</span>
                 </h6>
+                {{#if returnstatus}} {{else}} <h6 style="font-size: 16px; color: #333;">Reason:
+                   <span class="badge badge-danger">{{reason}}</span>
+                </h6>{{/if}}
               </div>
             </div>
             <div class="d-flex justify-content-end align-items-center flex-wrap" style="margin-top: 10px;">
@@ -134,33 +137,8 @@
 </style>
 
 
-{{!-- 
-<div class="modal fade" id="cancellationModal" tabindex="-1" role="dialog" aria-labelledby="cancellationModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="cancellationModalLabel">Cancellation Reason</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="form-group">
-            <label for="cancellationDescription">Please provide a reason for cancellation:</label>
-            <input type="text" class="form-control" id="cancellationDescription">
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary btn-sm" id="confirmCancellation">Confirm Cancellation</button>
-      </div>
-    </div>
-  </div>
-</div> --}}
 
-
+{{!-- cancel reason modal --}}
 <div class="modal fade" id="cancellationModal" tabindex="-1" role="dialog" aria-labelledby="cancellationModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
@@ -188,7 +166,7 @@
 
 
 
-
+{{!-- cancel reason jquery --}}
 <script>
   function showCancellationModal(orderId) {
   $('#cancellationModal').modal('show');
@@ -200,7 +178,7 @@
 </script>
 
 
-
+{{!-- return reason modal --}}
 <div class="modal fade" id="returnModal" tabindex="-1" role="dialog" aria-labelledby="cancellationModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
@@ -220,14 +198,14 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary btn-sm" id="confirmReturn">Confirm Cancellation</button>
+        <button type="button" class="btn btn-primary btn-sm" id="confirmReturn">Confirm Return</button>
       </div>
     </div>
   </div>
 </div>
 
 
-
+{{!-- return reason jquery --}}
 <script>
   function showReturnModal(orderId) {
   $('#returnModal').modal('show');
