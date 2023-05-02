@@ -1,3 +1,26 @@
+   <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__text">
+                        <h4>Your Address</h4>
+                        <div class="breadcrumb__links">
+                            <a href="/">Home</a>
+                            <span>Address</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<div class="container mt-3 d-flex justify-content-center">
+  <a href="/userprofile"> <button type="button" class="btn btn-outline-dark btn-round btn-sm mr-md-3 mb-md-0 mb-2">Add Address</button></a>
+</div>
+
+                            
+{{#if passAddress}}
 <section class="address-section">
   <div class="container">
     <div class="row">
@@ -27,7 +50,18 @@
     </div>
   </div>
 </section>
-
+{{else}}
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-sm-12 text-center empty-page mb-5">
+      {{!-- <i class="icon an an-heart"></i> --}}
+      <i class="fa fa-map-marker fa-2x"></i>
+      <h2>Address is empty!</h2>
+      <p class="mb-3 pb-1">No Addres were added to the Profile</p>
+    </div>
+  </div>
+</div>
+{{/if}}
 <style>
   .address-section {
     background-color: #f5f5f5;

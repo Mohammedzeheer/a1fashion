@@ -17,7 +17,7 @@
         </div>
     </section>
 
-
+{{#if userorder}}
 <div class="container" style="margin-top: 20px; padding: 20px; border-radius: 5px; background-color: #F4F4F4;">
   {{#each userorder}}
     <div class="row mb-3">
@@ -106,6 +106,30 @@
     </div>
   {{/each}}
 </div>
+{{else}}
+
+    <div class="container mt-5"  >
+        <div class="row">
+            <div class="col-sm-12 text-center empty-page mb-5">
+                {{!-- <i class="icon an an-heart"></i> --}}
+                <i class="fa fa-shopping-bag fa-2x"></i></p>           
+                <h2>Your order is empty.!</h2>
+                <p class="mb-3 pb-1">It seems you haven't purchased any products yet.</p>
+            </div>
+        </div>
+    </div>
+
+
+<div class="container mb-5 ">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="continue__btn">
+                <a href="/shop">Continue Shopping</a>
+            </div>
+        </div>
+    </div>
+</div>
+{{/if}}
 
 <style>
   .processing {
