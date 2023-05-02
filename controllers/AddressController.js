@@ -111,7 +111,7 @@ const selectAddress = async(req,res,next)=>{
         res.redirect('/checkout')
     } catch (error) {
         console.log(error)
-    res.render('404')     
+        res.render('404')     
     }
 }
 

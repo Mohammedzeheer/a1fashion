@@ -13,8 +13,16 @@ var userId
        userId=req.session.userid
   
    const wishlistdata=await wishlistCollection.find({userId:userId}).populate("products.productId").lean()
-   const [{ products }] = wishlistdata;
-  
+ 
+   if (!wishlistdata.length) {
+    res.render('emptyWishlist', { user: true, userName })
+  }
+  let [{ products }] = wishlistdata;
+  if (products.length == 0) {
+    res.render('emptyWishlist', { user: true, userName })
+  }
+
+else{
    const wishList = products.map(({productId}) => ({   
        _id:productId._id, 
        productname:productId.productname, 
@@ -23,7 +31,8 @@ var userId
 }))
   console.log(wishList);
    res.render("wishlist", {user:true, userName, wishList })
-   } catch (error) {
+ }
+  } catch (error) {
     console.log(error)
     res.render('404')
   }
@@ -37,7 +46,7 @@ const addToWishlist=async(req,res,next)=>{
        const wishlistData=await wishlistCollection.findOne({userId:userid}).lean()
        if(wishlistData){
         const productfound=await wishlistCollection.findOne({userId:userid, "products.productId": req.query.id}).lean()
-        console.log(productfound);
+        console.log("wishlist sdaidfdf",productfound);
         if(productfound){
             await wishlistCollection.updateOne({userId:userid},{$pull:{products:{productId:req.query.id}}})
             console.log('removed');
@@ -49,6 +58,7 @@ const addToWishlist=async(req,res,next)=>{
         await wishlistCollection.create({userId:userid,products:{productId:req.query.id}})
         console.log('created');
        }
+      
 
     }catch(error){
       console.log(error)
@@ -65,7 +75,7 @@ const deleteFromWishlist=async (req,res,next)=>{
        res.redirect('/wishlist')
     } catch (error) {
       console.log(error)
-    res.render('404')
+    res.render('404')                                                                                                                                                                                                                                                                                                                                                                                                                                              
     }
   }
 

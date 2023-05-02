@@ -180,13 +180,14 @@ const otpsubmit = async function (req, res, next) {
     const check = req.body.otp;
     const join = check.join('')
     if (OtpCode == join) {
-      await usercollection.insertMany([data])
+      let hello= await usercollection.insertMany([data])
+      console.log(hello)
       req.session.user = data.name
       userName = data.name
-      req.session.userid = userfind._id //added for session 
-      req.session.useremail = userfind.email //added for session 
-      req.session.wallet = userfind.wallet //added for session 
-      res.redirect('/')
+      req.session.userid = data._id //added for session 
+      req.session.useremail = data.email //added for session 
+      req.session.wallet = data.wallet //added for session    
+      res.redirect('/') 
     }
     else {
       otperror = "Otp is not matched"
@@ -197,7 +198,6 @@ const otpsubmit = async function (req, res, next) {
     res.render('404')
   }
 }
-
 
 
 
@@ -476,6 +476,9 @@ const welcomeMessageUser= async function (req, res, next) {
     res.render('404')
   }
 }
+
+
+
 
 
 

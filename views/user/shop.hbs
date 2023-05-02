@@ -98,8 +98,8 @@
                             </div>
                             <div class="product__item__text">
                                 <h6>{{productname}}</h6>
-                                <div data-toggle="modal" data-target="#addtocart"><a href="/addToCart?id={{_id}}" class="add-cart">+ Add
-                                        To Cart</a></div>
+                                <div data-toggle="modal" data-target="#addtocart"><a href="/addToCart?id={{_id}}" class="add-cart">+ Add To Cart</a></div>
+                                 {{!-- <a href="/addToCart?id={{_id}}" class="add-cart" onclick="addToCart()">+ Add To Cart</a> --}}       
                                 <h5>Rs: {{productprice}}</h5>
                             </div>
                         </div>
@@ -133,35 +133,24 @@
                         </div>
                     </div>
 
- 
 
-                    {{!-- <div class="row">
-                        <div class="col-lg-12">
-                            <div class="product__pagination">
-                                <a class="active" href="#">1</a>
-                                <a href="#">2</a>
-                                <a href="#">3</a>
-                                <span>...</span>
-                                <a href="#">21</a>
-                            </div>
-                        </div>
-                    </div> --}}
                 </div>
             </div>
         </div>
     </section>
     <!-- Shop Section End -->
 
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-
-
-
-
-
+<script>
+function addToCart() {
+  swal("Success", "Item has been added to the cart!", "success");
+}
+</script>
 
 
 <!-- add to cart popup modal -->
-<div id="addtocart" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+<div id="addtocart0" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
      	<div class="d-flex justify-content-center align-items-center m-2"> <img  style="width:4rem;height:4rem" src="http://goactionstations.co.uk/wp-content/uploads/2017/03/Green-Round-Tick.png" alt=""></div>
@@ -170,6 +159,25 @@
   </div>
 </div>
  <!-- code  End -->
+
+ <div id="addtocart" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="d-flex justify-content-center align-items-center m-2">
+          <img style="width:4rem;height:4rem" src="http://goactionstations.co.uk/wp-content/uploads/2017/03/Green-Round-Tick.png" alt="">
+        </div>
+        <h6 class="d-flex justify-content-center align-items-center m-2 success">Added To Cart!</h6>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 
 
 <script>
@@ -206,8 +214,7 @@ setTimeout(function() {
       document.getElementById("itemnotfound").innerHTML = ''
     } else {
       productCards[i].style.display = "none";
-      document.getElementById("itemnotfound").innerHTML = 'Item Not Found'
-
+      document.getElementById("itemnotfound").innerHTML = 'Item Not Found'   
     }
   }
 }
