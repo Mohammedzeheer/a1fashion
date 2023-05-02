@@ -19,7 +19,7 @@ let userName
 const indexpage = async function (req, res, next) {
   console.log(userName);
   try {
-  if (req.session)
+  if (req.session.userid)
   {
     userName
   }
