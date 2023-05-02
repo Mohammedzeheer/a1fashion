@@ -19,6 +19,14 @@ let userName
 const indexpage = async function (req, res, next) {
   console.log(userName);
   try {
+  if (req.session)
+  {
+    userName
+  }
+  else
+  {
+   userName=null
+  }
     const itemsPerPage = 4;
     const page = parseInt(req.query.page) || 1;
     const totalItems = await productcollection.countDocuments();
@@ -32,8 +40,7 @@ const indexpage = async function (req, res, next) {
   } catch (error) {
     console.log(error)
     res.render('404')
-  }
-   
+  }  
 }
 
 
