@@ -13,7 +13,8 @@ const nocache = require("nocache");
 
 userrouter.get('/',nocache(),userget.indexpage);
 // router.get('/shop',userget.shoppage );
-userrouter.get('/shop',usersession.isLogin,userget.productshowuser ); //shop page 
+//userrouter.get('/shop',usersession.isLogin,userget.productshowuser ); //shop page 
+userrouter.get('/shop',userget.productshowuser ); //shop page 
 
 userrouter.get('/about',userget.aboutpage);
 userrouter.get('/contact',userget.contactPage);
@@ -23,16 +24,16 @@ userrouter.get('/blog',userget.blogPage);
 userrouter.get('/shop-details',userget.shopdetails) //shop details page 
 
 userrouter.get('/shoppingCart',usersession.isLogin,cartGet.userGetShopCart) //HERE SHOP PAGE WILL APPEAR
-userrouter.get('/addToCart',cartGet.addToCart) //ADD TO CART FUNCTION HERE WORKS
-userrouter.get('/deleteCart',cartGet.deleteFromcart)//DELETE FROM CART 
-userrouter.put('/updateQuantity/:id',cartGet.updateQuantity)
+userrouter.get('/addToCart',usersession.isLogin,cartGet.addToCart) //ADD TO CART FUNCTION HERE WORKS
+userrouter.get('/deleteCart',usersession.isLogin,cartGet.deleteFromcart)//DELETE FROM CART 
+userrouter.put('/updateQuantity/:id',usersession.isLogin,cartGet.updateQuantity)
 
 
-userrouter.get('/addToWishlist',wishlistGet.addToWishlist); //here add to wishlist works 
+userrouter.get('/addToWishlist',usersession.isLogin,wishlistGet.addToWishlist); //here add to wishlist works 
 userrouter.get('/wishlist',usersession.isLogin,wishlistGet.GetWishlist); //here show wishlist page 
-userrouter.get('/deletewishlist/:id',wishlistGet.deleteFromWishlist) //delete condition work here 
+userrouter.get('/deletewishlist/:id',usersession.isLogin,wishlistGet.deleteFromWishlist) //delete condition work here 
 
-userrouter.get('/checkout',addressGet.checkoutPage)// CHECKOUT PAGE 
+userrouter.get('/checkout',usersession.isLogin,addressGet.checkoutPage)// CHECKOUT PAGE 
 // userrouter.get('/ordered',addressGet.ordered)//success page 
 userrouter.post('/ordered',orderGet.userPostOrderListPass)
 userrouter.post('/verify-payment',orderGet.userGetverifypayment)
