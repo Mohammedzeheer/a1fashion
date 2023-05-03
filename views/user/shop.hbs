@@ -98,8 +98,8 @@
                             </div>
                             <div class="product__item__text">
                                 <h6>{{productname}}</h6>
-                                <div data-toggle="modal" data-target="#addtocart"><a href="/addToCart?id={{_id}}" class="add-cart">+ Add To Cart</a></div>
-                                 {{!-- <a href="/addToCart?id={{_id}}" class="add-cart" onclick="addToCart()">+ Add To Cart</a> --}}       
+                                <a href="/addToCart?id={{_id}}" onclick="event.preventDefault(); addToCart1('{{_id}}');" class="add-cart">Add To Cart</a>
+                                {{!-- <div data-toggle="modal" data-target="#addtocart"><a href="/addToCart?id={{_id}}" class="add-cart">+ Add To Cart</a></div> --}}
                                 <h5>Rs: {{productprice}}</h5>
                             </div>
                         </div>
@@ -149,16 +149,6 @@ function addToCart() {
 </script>
 
 
-<!-- add to cart popup modal -->
-<div id="addtocart0" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-     	<div class="d-flex justify-content-center align-items-center m-2"> <img  style="width:4rem;height:4rem" src="http://goactionstations.co.uk/wp-content/uploads/2017/03/Green-Round-Tick.png" alt=""></div>
-		<h6 class="d-flex justify-content-center align-items-center m-2 success">Added To Cart!</h6>
-    </div>
-  </div>
-</div>
- <!-- code  End -->
 
  <div id="addtocart" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm">
@@ -179,20 +169,6 @@ function addToCart() {
 
 
 
-
-<script>
-    // Show popup when button is clicked
-$('#add-to-cart-btn').click(function() {
-  $('#addtocart').modal('show');
-});
-
-// Hide popup after 3 seconds
-setTimeout(function() {
-  $('#addtocart').modal('hide');
-}, 2000);
-
-</script>
- 
 
 
 
@@ -270,7 +246,51 @@ setTimeout(function() {
 </script>
 
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert@2"></script>
+<script>
+ function addToCart1(productId) {
+  swal({
+    title: "Add to Cart?",
+    icon: "success",
+    buttons: ["Cancel", "Add"],
+    dangerMode: true,
+  })
+  .then((willAdd) => {
+    if (willAdd) {
+      fetch(`/addToCart?id=${productId}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.status === true) {
+            location.reload();
+          }
+        })
+        .catch(error => console.error(error));
+    }
+  });
+}
 
+</script>
+
+<style>
+    .swal-title {
+        margin-top: -10px;
+  font-size: 28px;
+}
+.swal-icon{
+  transform: scale(0.8);
+}
+       .swal-modal {
+  width: 20rem!important;
+  height:16rem !important;
+}
+
+    .swal-button{
+  padding: 7px 19px;
+  border-radius: 2px;
+  font-size: 12px;
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
+}
+</style>
 
 
 

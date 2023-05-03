@@ -109,7 +109,7 @@ const addToCart=async(req,res,next)=>{
       }else{
         await cartCollection.create({userId:userid,products:{productId:productid,quantity:1,totalprice:price}})
       }
-      
+      res.json({status:true})
     } catch (error) {
       console.log(error)
       res.render('404')

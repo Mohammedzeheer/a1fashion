@@ -109,9 +109,9 @@
                  {{#each producttable}}
                 <div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
                     <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="/productimage/{{productimage.[0]}}">
+                       <a href="/shop-details?id={{_id}}"><div class="product__item__pic set-bg" data-setbg="/productimage/{{productimage.[0]}}">
                             <span class="label">New</span>
-                        </div>
+                        </div></a>
                         <div class="product__item__text">
                         <h6>{{productname}}</h6>
                             <h5>{{productprice}}</h5>
@@ -147,7 +147,7 @@
     <!-- Product Section End -->
 
 
-    <!-- Instagram Section Begin -->
+    {{!-- <!-- Instagram Section Begin -->
     <section class="instagram spad">
         <div class="container">
             <div class="row">
@@ -170,7 +170,7 @@
             </div>
         </div>
     </section>
-    <!-- Instagram Section End -->
+    <!-- Instagram Section End --> --}}
 
- <section class="latest spad"></section>
+ {{!-- <section class="latest spad"></section> --}}
 
