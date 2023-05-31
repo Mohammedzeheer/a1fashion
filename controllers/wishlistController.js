@@ -5,12 +5,11 @@ const wishlistCollection=require('../models/wishlistModel')
 
 
 ///SHOP CART Page here appear and this function works
-var userName
-var userId
+
  const GetWishlist= async (req, res,next) => {
    try {
-       userName=req.session.user
-       userId=req.session.userid
+      let userName=req.session.user
+      let userId=req.session.userid
   
    const wishlistdata=await wishlistCollection.find({userId:userId}).populate("products.productId").lean()
  
@@ -69,7 +68,7 @@ const addToWishlist=async(req,res,next)=>{
 ///whishlist delete
 const deleteFromWishlist=async (req,res,next)=>{
     try {
-      userId=req.session.userid
+      let userId=req.session.userid
        wishlistid=req.params.id  
        await wishlistCollection.updateOne({userId:userId},{$pull:{products:{productId:wishlistid}}}) 
        res.redirect('/wishlist')

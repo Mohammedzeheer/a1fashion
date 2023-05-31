@@ -11,14 +11,14 @@ const ordercollection=require('../models/orderModel')
 const { localsAsTemplateData } = require('hbs')
 let msg
 let userfind
-let userName
+// let userName
 // let user
 
 
 //<<<<<<<<<<<<<<    USER HOME PAGE   >>>>>>>>>>
-const indexpage = async function (req, res, next) {
-  console.log(userName);
+const indexpage = async function (req, res, next) { 
   try {
+    let userName=req.session.user 
     const itemsPerPage = 4;
     const page = parseInt(req.query.page) || 1;
     const totalItems = await productcollection.countDocuments();
@@ -71,7 +71,7 @@ const userlogin = async function (req, res, next) {
       res.render('userlogin',{msg:"You are blocked",userlogin: true})
       }
       else if (userfind.password == userdata.password) {
-        userName = userfind.name //here added for to see the name of user in the page 
+        // userName = userfind.name //here added for to see the name of user in the page 
         req.session.user = userfind.name //added for session 
         req.session.userid = userfind._id //added for session 
         req.session.useremail = userfind.email //added for session 
@@ -217,6 +217,7 @@ const resendotp = async function (req, res, next) {
 let categorydropdown
 const productshowuser = async function (req, res, next) { 
  try {
+   let userName=req.session.user 
     const itemsPerPage = 6;
     const page = parseInt(req.query.page) || 1;
     const totalItems = await productcollection.countDocuments();
@@ -238,6 +239,7 @@ const productshowuser = async function (req, res, next) {
   //<<<<<<<<<<<<<<<<<<<<<<  FILTERING PRODUCT CATEGORY BASE  >>>>>>>>>>
   const categoryFilter= async function (req,res,next){  
     try {
+      let userName=req.session.user 
       const categoryname=req.query.catname
       const itemsPerPage = 6;
       const page = parseInt(req.query.page) || 1;
@@ -262,6 +264,7 @@ const productshowuser = async function (req, res, next) {
   //<<<<<<<<<<<<<<<<  SHOP DETAIL PAGE RENDER   >>>>>>>>>>
   const shopdetails = async function (req, res, next) {
   try {
+    let userName=req.session.user 
     let shopdetailtable = await productcollection.findOne({ _id: req.query.id })
     const { _id,productcategory,productname, productimage ,productprice,description} = shopdetailtable
     res.render('shopDetails', {_id,productcategory, productimage,productname,productprice,description, user: true, userName, });
@@ -277,6 +280,7 @@ const productshowuser = async function (req, res, next) {
 //<<<<<<<<<<<<<<<<<  ABOUT PAGE RENDER  >>>>>>>>>>
 const aboutpage = function (req, res, next) {
   try {
+    let userName=req.session.user 
     res.render('about', { user: true ,userName});
   } catch (error) {
     res.render('404')
@@ -286,6 +290,7 @@ const aboutpage = function (req, res, next) {
 //<<<<<<<<<<<<<<<<<<  CONTACT PAGE RENDER  >>>>>>>>>>
 const contactPage = function (req, res, next) {
   try {
+    let userName=req.session.user 
     res.render('contact', { user: true,userName});
   } catch (error) {
     console.log(error)
@@ -297,6 +302,7 @@ const contactPage = function (req, res, next) {
 //<<<<<<<<<<<<<<<<<<<<<<  BLOG PAGE RENDER   >>>>>>>>>>
 const blogPage = function (req, res, next) {
   try {
+    let userName=req.session.user 
     res.render('blog', { user: true ,userName });
   } catch (error) {
     console.log(error)
@@ -308,9 +314,9 @@ const blogPage = function (req, res, next) {
 //<<<<<<<<<<<<<<<<<<<<<< USER LOGOUT  >>>>>>>>>>
 const logout = function (req, res, next) {
   res.render('userhome', { user: true });
-  userName = ""
-  // req.session.user = null
-  req.session =null
+  // userName = ""
+  req.session.user = null
+  // req.session =null
 }
 
 

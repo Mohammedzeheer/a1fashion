@@ -21,11 +21,11 @@ const shopCart= async(req,res,next)=>{
 }
 
 ///SHOP CART Page here appear and this function works
-let userName
+// let userName
 let userId
 const userGetShopCart = async (req, res, next) => {
   try {
-    userName = req.session.user
+    let userName = req.session.user
     userId = req.session.userid
     couponError = req.session.couponError
 

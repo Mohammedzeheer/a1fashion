@@ -12,7 +12,7 @@ var instance = new Razorpay({
 });
 
 
-let userName
+
 const saveOrder= async function (req,res, next){
    userID= req.session.userid
 }
@@ -40,7 +40,7 @@ const userPostOrderListPass = async function (req, res, next) {
   
     payment = req.body.paymentmethod
     grandtotal = req.session.grandtotal;
-    userName=req.session.user
+    let userName=req.session.user
     userId = req.session.userid
     orderdate = new Date().toLocaleString();
     let deldt=new Date()
@@ -207,7 +207,7 @@ const orderAdminProductView= async (req,res,next)=>{
   //<<<<<<<<<<<<<<--HERE ORDER SHOWS TO USER-->>>>>>>>>>>>>>>>>>>>>>>
 const orderUserPage=async(req,res,next)=>{
   try {
-    userName=req.session.user
+    let userName=req.session.user
     userid=req.session.userid
     let userorder=await ordercollection.find({ordereduser:userName}).sort({orderdate:-1}).lean()
     res.render('orderUser',{user:true,userorder,userName})
@@ -220,7 +220,7 @@ const orderUserPage=async(req,res,next)=>{
 //<<<<<<<<<<<<<<-- USER SIDE ORDER PRODUCT VIEW PAGE-->>>>>>>>>>>>>>>>>>>>>>>
 const orderProductView=async (req,res,next)=>{
   try{    
-     userName=req.session.user
+     let userName=req.session.user
      let orderid=req.query.id
 
      let orderProductView = await ordercollection.findOne({_id : orderid })
@@ -236,6 +236,7 @@ const orderProductView=async (req,res,next)=>{
 ////<<<<<<<<<<<<<<--ORDER SUCCESSFULLY PAGE RENDER -->>>>>>>>>>>>>>>>>>>>>>>
 const orderSuccessfully=async (req,res,)=>{
   try {
+    let userName=req.session.user
     res.render('orderSuccessfully',{user:true,userName})
   } catch (error) {
     res.render('404')

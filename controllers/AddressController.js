@@ -5,12 +5,12 @@ const categorycollection = require('../models/categorymodel')
 const cartCollection=require('../models/cartModel')
 const AddressCollection=require('../models/AddressModel')
 
-let userName // USER NAME FOR SHOW HEADER OF PAGE AND CONDITION WOKS 
+// letuserName // USER NAME FOR SHOW HEADER OF PAGE AND CONDITION WOKS 
 
 //HERE THE PAGE USER PROFILE WILL RENDER 
 const userprofile = function (req, res, next) {
     try {
-     userName=req.session.user
+    let userName=req.session.user
     console.log(userName);
     userdatas={
       uname:userName,
@@ -54,7 +54,7 @@ const userAddress= async(req,res,next)=>{
  //HERE GROUP OF ADRESS PAGE WILL RENDER  
 const groupAddress = async(req,res,next)=>{
     try {
-        userName = req.session.user
+        let userName = req.session.user
         userId=req.session.userid  
         let passAddress=await AddressCollection.findOne({user:userId})  
         res.render('addressGroup',{user:true,userName,passAddress})
@@ -70,7 +70,7 @@ const groupAddress = async(req,res,next)=>{
 const checkoutPage = async function (req, res, next) {
     try {
         console.log(passaddresslist);  
-        userName = req.session.user
+        let userName = req.session.user
         userId=req.session.userid  
         const cartDataList = await cartCollection.find({userId:userId}).populate("products.productId").lean();
         const [{ products }] = cartDataList;
@@ -101,7 +101,7 @@ const checkoutPage = async function (req, res, next) {
 let passaddresslist
 const selectAddress = async(req,res,next)=>{
     try {
-        userName = req.session.user
+       let userName = req.session.user
         userId=req.session.userid  
         passid=req.params.indexof        
         let passAddress=await AddressCollection.findOne({user:userId})   
